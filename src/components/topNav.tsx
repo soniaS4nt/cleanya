@@ -6,7 +6,7 @@ import Image from 'next/image'
 const links = [
   {
     icon: '',
-    href: '#inicio',
+    href: '/',
     name: 'Inicio',
   },
   {
@@ -141,7 +141,7 @@ export default function TopNav() {
               href={href}
               key={name}
               onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
-              className={`text-2xl font-extrabold justify-center items-center gap-1.5 flex p-2'
+              className={`text-2xl font-extrabold justify-center items-center m-2 flex p-2'
                   ${href === activeSection ? 'text-blue-700' : ''}`}
             >
               {name}

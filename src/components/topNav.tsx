@@ -70,7 +70,7 @@ export default function TopNav() {
           alt=""
           width={100}
           height={100}
-          className="object-contain my-5 mx-10"
+          className="object-contain my-5 mx-5"
         />
         <button
           onClick={toggleMobileMenu}

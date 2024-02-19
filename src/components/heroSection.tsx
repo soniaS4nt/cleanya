@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function HeroSection() {
   return (
-    <header className="pt-16 my-5">
+    <header className="flex flex-col items-center pt-16 my-5">
       <h1 className="font-extrabold lg:text-5xl">¡Próximamente!</h1>
       <Image
         className=""

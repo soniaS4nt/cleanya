@@ -1,7 +1,11 @@
-import React from 'react'
+import type { Route } from 'next'
 import Link from 'next/link'
 
-export default function ButtonBooking({ href }) {
+export default function ButtonBooking<T extends string>({
+  href,
+}: {
+  href: Route<T> | URL
+}) {
   return (
     <Link
       href={href}

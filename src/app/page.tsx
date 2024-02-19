@@ -1,17 +1,10 @@
-import Image from 'next/image'
-
+import HeroSection from '@/components/heroSection'
+import TopNav from '@/components/topNav'
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-between p-2 lg:p-24 ">
-      <h1 className="font-extrabold lg:text-5xl">¡Próximamente!</h1>
-      <Image
-        className=""
-        src="/HeroIllustrationMobile.svg"
-        alt="Hero"
-        width={300}
-        height={300}
-        priority
-      />
+    <main className="flex flex-col items-center justify-center mx-auto px-2 lg:px-24 ">
+      <TopNav />
+      <HeroSection />
     </main>
   )
 }

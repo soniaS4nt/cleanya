@@ -3,9 +3,9 @@ import colors from 'tailwindcss/colors'
 
 const config: Config = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
     // Path to Tremor module
     './node_modules/@tremor/**/*.{js,ts,jsx,tsx}',
   ],

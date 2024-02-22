@@ -5,13 +5,15 @@ import {
   DateRangePickerItem,
   DateRangePickerValue,
   DatePicker,
+  DatePickerProps,
   DatePickerValue,
 } from '@tremor/react'
 import { es } from 'date-fns/locale'
 
 type Props = {
+  name?: string
   title?: string
-  onValueChange?: (date: DatePickerValue) => void
+  onValueChange: (date: DatePickerValue) => void
 }
 export function DateRangePickerHero({ title }: Props) {
   const [value, setValue] = useState<DateRangePickerValue>({
@@ -44,22 +46,24 @@ export function DateRangePickerHero({ title }: Props) {
   )
 }
 
-export function DatePickerHero({ onValueChange }: Props) {
-  const [value, setValue] = useState<DatePickerValue>(new Date())
+export function DatePickerHero({ onValueChange, name }: Props) {
+  const [value, setValue] = useState<DatePickerValue>()
+
+  // Función para manejar cambios en la selección de fecha
+  const handleChange = (newValue: DatePickerValue) => {
+    setValue(newValue) // Actualiza el estado con la nueva fecha
+    onValueChange(newValue) // Llama a la función proporcionada con la nueva fecha
+  }
 
   return (
     <DatePicker
       className="mx-auto max-w-72"
       value={value}
-      onValueChange={(selectedDate) => {
-        setValue(selectedDate)
-        if (onValueChange) {
-          onValueChange(selectedDate)
-        }
-      }}
+      onValueChange={handleChange}
       locale={es}
-      placeholder="Seleccionar"
+      placeholder="Seleccionar fecha..."
       color="blue"
+      enableClear
     />
   )
 }

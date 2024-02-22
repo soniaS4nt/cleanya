@@ -1,12 +1,11 @@
-import React, { ChangeEvent } from 'react'
 import { MultiSelect, MultiSelectItem } from '@tremor/react'
 
-type Option = {
-  time: string
+export type Option = {
+  hours: string
 }
 
 type Props = {
-  value: string[]
+  value?: string[]
   onValueChange: (value: string[]) => void
   options: Option[] // Especificar el tipo de options como un array de objetos Option
 }
@@ -25,12 +24,19 @@ export default function MultiSelectComponent({
       className="mx-auto max-w-md"
       onValueChange={handleChange}
       value={value}
+      name="multiSelect"
     >
-      {options.map((hours, index) => (
-        <MultiSelectItem key={index} value={hours.time}>
-          {hours.time}
-        </MultiSelectItem>
-      ))}
+      {options && options.length > 0 ? (
+        options.map((hours, index) => (
+          <MultiSelectItem key={hours.hours} value={hours.hours}>
+            {hours.hours}
+          </MultiSelectItem>
+        ))
+      ) : (
+        <div className="p-2 text-center" key={'div'}>
+          No hay horas disponibles
+        </div>
+      )}
     </MultiSelect>
   )
 }

@@ -6,6 +6,7 @@ export default function ButtonBooking<T extends string>({
   className,
 }: {
   href: Route<T> | URL
+  className: string
 }) {
   return (
     <Link

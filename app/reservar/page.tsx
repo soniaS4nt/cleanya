@@ -1,7 +1,9 @@
 import CreateForm from '@/components/create-form'
+import DetailsForm from '@/components/details-form'
 import InfoForm from '@/components/info-form'
 import InfoComponent from '@/components/infoComponent'
 import TabsHero from '@/components/tabs'
+import { BookingProvider } from '@/contexts/bookingsContext'
 import { getData } from '@/lib/data'
 
 async function Booking() {
@@ -42,6 +44,14 @@ async function Booking() {
       ),
     },
     {
+      title: 'Detalles',
+      content: (
+        <div>
+          <DetailsForm />
+        </div>
+      ),
+    },
+    {
       title: 'El pago',
       content: (
         <div>
@@ -53,7 +63,9 @@ async function Booking() {
   ]
   return (
     <div className="h-screen">
-      <TabsHero tabs={tabs} className="mt-16" />
+      <BookingProvider>
+        <TabsHero tabs={tabs} className="mt-16" />
+      </BookingProvider>
     </div>
   )
 }

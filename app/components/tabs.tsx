@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@tremor/react'
 
 interface TabData {
@@ -12,30 +13,35 @@ interface TabsHeroProps {
 }
 
 const TabsHero: React.FC<TabsHeroProps> = ({ tabs, className }) => {
+  const [activeTab, setActiveTab] = useState(0) // Estado para almacenar el índice de la pestaña activa
+  const handleChangeTab = (newIndex: number) => {
+    setActiveTab(newIndex)
+  }
+
+  const handleNextTab: React.MouseEventHandler<HTMLButtonElement> = () => {
+    setActiveTab((prevIndex) => (prevIndex + 1) % tabs.length)
+  }
+
   return (
     <div className={`mx-auto max-w-lg space-y-12 ${className}`}>
-      <TabGroup>
-        <TabList variant="line" defaultValue={1}>
-          {tabs.map(
-            (
-              tab,
-              index // Mapea sobre las pestañas para renderizar cada una
-            ) => (
-              <Tab key={index}>{tab.title}</Tab> // Usamos index como key temporal
-            )
-          )}
+      <TabGroup index={activeTab} onIndexChange={handleChangeTab}>
+        <TabList variant="line">
+          {tabs.map((tab, index) => (
+            <Tab key={index}>{tab.title}</Tab> // Usamos index como key temporal
+          ))}
         </TabList>
         <TabPanels>
-          {tabs.map(
-            (
-              tab,
-              index // Mapea sobre las pestañas para renderizar el contenido correspondiente
-            ) => (
-              <TabPanel key={index}>{tab.content}</TabPanel> // Usamos index como key temporal
-            )
-          )}
+          {tabs.map((tab, index) => (
+            <TabPanel key={index}>{tab.content}</TabPanel> // Usamos index como key temporal
+          ))}
         </TabPanels>
       </TabGroup>
+      <button
+        onClick={handleNextTab}
+        className="bg-tremor-brand rounded-lg  text-white px-4 py-2 mt-4 shadow-md"
+      >
+        Siguiente
+      </button>
     </div>
   )
 }

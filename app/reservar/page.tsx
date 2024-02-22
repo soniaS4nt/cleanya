@@ -52,7 +52,7 @@ async function Booking() {
     // Añade más objetos de pestaña según sea necesario
   ]
   return (
-    <div>
+    <div className="h-screen">
       <TabsHero tabs={tabs} className="mt-16" />
     </div>
   )

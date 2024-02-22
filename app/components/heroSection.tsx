@@ -18,26 +18,24 @@ export default function HeroSection() {
           priority
         />
       </header>
-      <div className="flex flex-row">
-        <h1 className="from-neutral-900 font-extrabold text-2xl">
-          ¿Por qué elegirnos?
+      <div className="flex flex-col text-center items-center md:flex-row md:items-center">
+        <h1 className="from-neutral-900 font-extrabold text-4xl m-3 md:w-60">
+          ¿Por qué elegir ClenaYA?
         </h1>
-        <p>
-          Bienvenido a CleanYa, tu solución integral para una limpieza impecable
-          y rápida. En CleanYa, entendemos que la limpieza es más que un simple
-          deber; es una forma de vida que transforma espacios y promueve la
-          tranquilidad. Nos enorgullece ofrecerte servicios de limpieza
-          excepcionales para tu hogar, oficina o espacio comercial. En CleanYa,
-          nuestra misión es brindarte comodidad y tranquilidad al proporcionarte
-          un ambiente limpio y saludable para vivir y trabajar. Nos destacamos
-          por nuestra atención al detalle, nuestra eficiencia y nuestro
-          compromiso con la satisfacción del cliente en cada servicio que
-          ofrecemos.
+        <p className="m-3 text-justify md:max-w-xl">
+          En CleanYa, entendemos que la limpieza es más que un simple deber; es
+          una forma de vida que transforma espacios y promueve la tranquilidad.
+          Nos enorgullece ofrecerte servicios de limpieza excepcionales para tu
+          hogar, oficina o espacio comercial. En CleanYa, nuestra misión es
+          brindarte comodidad y tranquilidad al proporcionarte un ambiente
+          limpio y saludable para vivir y trabajar. Nos destacamos por nuestra
+          atención al detalle, nuestra eficiencia y nuestro compromiso con la
+          satisfacción del cliente en cada servicio que ofrecemos.
         </p>
       </div>
 
       <Image
-        className="flex "
+        className="flex m-3 p-1 md:mt-40"
         src="/Illustration.svg"
         alt=""
         width={900}

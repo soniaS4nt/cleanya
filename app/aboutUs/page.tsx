@@ -1,5 +1,4 @@
 import ContactSection from '@/components/contactSection'
-import React from 'react'
 
 export default function Page() {
   return (
@@ -8,7 +7,7 @@ export default function Page() {
         <h1 className="lg:font-extrabold font-bold text-4xl text-center">
           Sobre CleanYa
         </h1>
-        <div className="flex-grow flex flex-col items-end w-1/3">
+        <div className="flex flex-col text-justify md:mx-64">
           <p>
             En CleanYa, somos más que una empresa de limpieza; somos una familia
             comprometida con la excelencia y el servicio excepcional. Desde

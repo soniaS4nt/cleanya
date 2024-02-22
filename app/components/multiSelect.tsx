@@ -33,7 +33,7 @@ export default function MultiSelectComponent({
           </MultiSelectItem>
         ))
       ) : (
-        <div className="p-2 text-center" key={'div'}>
+        <div className="p-2 text-center" key="no-data">
           No hay horas disponibles
         </div>
       )}

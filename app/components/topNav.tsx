@@ -11,12 +11,12 @@ const links = [
   },
   {
     icon: '',
-    href: '#about',
+    href: '/aboutUs',
     name: 'Sobre nosotros',
   },
   {
     icon: '',
-    href: '#contact',
+    href: '/aboutUs#contact',
     name: 'Contacto',
   },
 ]

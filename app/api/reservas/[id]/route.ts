@@ -6,8 +6,6 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    console.log(params)
-
     return NextResponse.json(
       { data: '', message: `Obteniendo reserva ${params.id}` },
       { status: 200 }

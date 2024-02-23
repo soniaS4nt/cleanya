@@ -1,8 +1,73 @@
-import { Schema, Document, model, models } from 'mongoose'
+import { Schema, model, models } from 'mongoose'
 
-const appoimentsHours = new Schema({
-  date: { type: String, require: true },
-  hours: { type: Array, require: true },
-})
+// 1. Create an interface representing a document in MongoDB.
+export interface IAppointment {
+  fechaHora: {
+    fecha: Date
+    hora: string[]
+  }
+  pago: string
+  detalles: {
+    frecuencia: { id: number; value: string }
+    direccion: {
+      region: string
+      comuna: string
+      calle: string
+      numero: string
+      adicionales: string
+    }
+    instrucciones: { id: number; value: string }
+  }
+  requirements: {
+    rooms: { id: number; value: string }
+    bathrooms: { id: number; value: string }
+    tipo: { id: number; value: string }
+  }
+}
 
-export default models.appoiment || model('appoiment', appoimentsHours)
+// 2. Create a Schema corresponding to the document interface.
+const AppointmentSchema = new Schema<IAppointment>(
+  {
+    fechaHora: {
+      fecha: { type: Date },
+      hora: [{ type: String }],
+    },
+    pago: { type: String },
+    detalles: {
+      frecuencia: {
+        id: { type: Number },
+        value: { type: String },
+      },
+      direccion: {
+        region: { type: String },
+        comuna: { type: String },
+        calle: { type: String },
+        numero: { type: String },
+        adicionales: { type: String },
+      },
+      instrucciones: {
+        id: { type: Number },
+        value: { type: String },
+      },
+    },
+    requirements: {
+      rooms: {
+        id: { type: Number },
+        value: { type: String },
+      },
+      bathrooms: {
+        id: { type: Number },
+        value: { type: String },
+      },
+      tipo: {
+        id: { type: Number },
+        value: { type: String },
+      },
+    },
+  },
+  { timestamps: true }
+)
+
+// 3. Create a Model.
+export default models.Appointment ||
+  model<IAppointment>('Appointment', AppointmentSchema)

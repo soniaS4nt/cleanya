@@ -5,7 +5,6 @@ import {
   DateRangePickerItem,
   DateRangePickerValue,
   DatePicker,
-  DatePickerProps,
   DatePickerValue,
 } from '@tremor/react'
 import { es } from 'date-fns/locale'

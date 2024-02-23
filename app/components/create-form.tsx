@@ -5,10 +5,11 @@ import MultiSelectComponent, { Option } from './multiSelect'
 import dayjs from 'dayjs'
 import { DatePickerValue } from '@tremor/react'
 import { toast } from 'sonner'
+import { useBookingContext } from '@/contexts/bookingsContext'
 
-interface ReservationData {
-  date: DatePickerValue | undefined
-  hours: string[]
+export interface ReservationData {
+  fecha: DatePickerValue | null
+  hora: string[]
 }
 
 interface Props {
@@ -22,18 +23,20 @@ interface Props {
   }[]
 }
 
-const reservaData = {
-  date: undefined,
-  hours: [],
-}
-
 export default function CreateForm({ data }: Props) {
   const [options, setOptions] = useState<Option[]>([]) // Inicializar date como un array de cadenas
-  const [reserva, setReserva] = useState<ReservationData>(reservaData)
+  const { bookingData, setBookingData } = useBookingContext()
 
   const handleChange = (value: DatePickerValue) => {
     setOptions([])
-    setReserva({ ...reserva, date: value })
+    setBookingData((prevData) => ({
+      ...prevData,
+      fechaHora: {
+        ...prevData.fechaHora,
+        fecha: value,
+      },
+    }))
+
     const newValue = dayjs(value).format('DD/MM/YY')
     if (value) {
       const dateFilter = data.find(
@@ -44,7 +47,13 @@ export default function CreateForm({ data }: Props) {
   }
 
   const handleChangeHours = (value: string[]) => {
-    setReserva({ ...reserva, hours: value })
+    setBookingData((prevData) => ({
+      ...prevData,
+      fechaHora: {
+        ...prevData.fechaHora,
+        hora: value,
+      },
+    }))
   }
   async function postAppoiment(body: any) {
     try {
@@ -72,7 +81,7 @@ export default function CreateForm({ data }: Props) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    const res = await postAppoiment(reserva)
+    const res = await postAppoiment(bookingData)
     if (res.status === 1) {
       toast.success('La reserva fue hecha exitosamente', {
         position: 'top-center',
@@ -90,12 +99,15 @@ export default function CreateForm({ data }: Props) {
       onSubmit={handleSubmit}
       className={'flex flex-col items-center pt-16 my-5'}
     >
-      <DatePickerHero onValueChange={handleChange} />
-
-      <MultiSelectComponent
-        onValueChange={handleChangeHours}
-        options={options}
-      />
+      <div className="shadow-lg rounded-lg min-w-72 mb-10">
+        <DatePickerHero onValueChange={handleChange} />
+      </div>
+      <div className="shadow-lg rounded-lg min-w-72 ">
+        <MultiSelectComponent
+          onValueChange={handleChangeHours}
+          options={options}
+        />
+      </div>
       <button type="submit" className="bg-blue-500">
         {' '}
         reservar

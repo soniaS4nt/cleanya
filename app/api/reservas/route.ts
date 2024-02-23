@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from 'next/server'
-import appoiments from '@/models/appoiments'
+import appoiments, { IAppointment } from '@/models/appoiments'
 export async function GET(request: Request) {
   try {
     return NextResponse.json(
@@ -17,10 +17,42 @@ export async function GET(request: Request) {
 
 export async function POST(request: NextRequest) {
   try {
-    const data = await request.json()
-    const res = new appoiments(data)
-    const newAppoiment = await res.save()
-    console.log(newAppoiment)
+    const data: IAppointment = await request.json()
+    const res = await appoiments.create({
+      fechaHora: { fecha: data.fechaHora.fecha, hora: data.fechaHora.hora },
+      pago: 'esto es ficticio',
+      detalles: {
+        direccion: {
+          adicionales: data.detalles.direccion.adicionales,
+          calle: data.detalles.direccion.calle,
+          comuna: data.detalles.direccion.comuna,
+          numero: data.detalles.direccion.numero,
+          region: data.detalles.direccion.region,
+        },
+        frecuencia: {
+          id: data.detalles.frecuencia.id,
+          value: data.detalles.frecuencia.value,
+        },
+        instrucciones: {
+          id: data.detalles.instrucciones.id,
+          value: data.detalles.instrucciones.value,
+        },
+      },
+      requirements: {
+        bathrooms: {
+          id: data.requirements.bathrooms.id,
+          value: data.requirements.bathrooms.value,
+        },
+        rooms: {
+          id: data.requirements.rooms.id,
+          value: data.requirements.rooms.value,
+        },
+        tipo: {
+          id: data.requirements.tipo.id,
+          value: data.requirements.tipo.value,
+        },
+      },
+    })
 
     return NextResponse.json(
       { message: 'Creando reserva', status: 1 },

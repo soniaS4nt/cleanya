@@ -10,8 +10,8 @@ export default function InfoForm() {
     if (data !== undefined) {
       setBookingData((prevData) => ({
         ...prevData,
-        requerimientos: {
-          ...prevData.requerimientos,
+        requirements: {
+          ...prevData.requirements,
           [field]: data,
         },
       }))
@@ -30,18 +30,18 @@ export default function InfoForm() {
 
   const titleBaños = 'N° de Baños'
   const rectanglesBaños = [
-    { id: 1, value: '1' },
-    { id: 2, value: '2' },
-    { id: 3, value: '3' },
-    { id: 4, value: '4' },
+    { id: 7, value: '1' },
+    { id: 8, value: '2' },
+    { id: 9, value: '3' },
+    { id: 10, value: '4' },
   ]
 
   const titleTipo = 'Tipo de limpieza'
   const rectanglesTipo = [
-    { id: 1, value: 'standard' },
-    { id: 2, value: 'deep clean' },
-    { id: 3, value: 'Mudanza' },
-    { id: 4, value: 'Post Cosntrucción' },
+    { id: 11, value: 'standard' },
+    { id: 12, value: 'deep clean' },
+    { id: 13, value: 'Mudanza' },
+    { id: 14, value: 'Post Cosntrucción' },
   ]
 
   const handleSubmit = () => {
@@ -54,22 +54,22 @@ export default function InfoForm() {
       <InfoComponent
         rectangles={rectanglesHabitaciones}
         title={titleHabitaciones}
-        name="habitaciones"
-        selected={bookingData.requerimientos?.habitaciones}
-        setSelected={(data) => handleSelection(data, 'habitaciones')}
+        name="rooms"
+        selected={bookingData.requirements?.rooms}
+        setSelected={(data) => handleSelection(data, 'rooms')}
       />
       <InfoComponent
         rectangles={rectanglesBaños}
         title={titleBaños}
-        name="baños"
-        selected={bookingData.requerimientos?.baños}
-        setSelected={(data) => handleSelection(data, 'baños')}
+        name="bathrooms"
+        selected={bookingData.requirements?.bathrooms}
+        setSelected={(data) => handleSelection(data, 'bathrooms')}
       />
       <InfoComponent
         rectangles={rectanglesTipo}
         title={titleTipo}
         name="tipo"
-        selected={bookingData.requerimientos?.tipo}
+        selected={bookingData.requirements?.tipo}
         setSelected={(data) => handleSelection(data, 'tipo')}
       />
     </>

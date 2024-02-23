@@ -3,8 +3,8 @@ export type RectangleType = {
   value: string
 }
 export interface RequerimientosI {
-  habitaciones: RectangleType | null // Número de habitaciones
-  baños: RectangleType | null // Número de baños
+  rooms: RectangleType | null // Número de habitaciones
+  bathrooms: RectangleType | null // Número de baños
   tipo: RectangleType | null // Tipo de limpieza
   // Puedes agregar más campos según sea necesario
 }

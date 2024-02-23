@@ -24,7 +24,6 @@ export interface DetailI {
 }
 export default function DetailsForm() {
   const { bookingData, setBookingData } = useBookingContext()
-  console.log(bookingData)
 
   const handleSelection = (data: RectangleType | string, field: string) => {
     if (data !== undefined) {
@@ -126,20 +125,24 @@ export default function DetailsForm() {
             <SearchSelectItem value="La serena">La serena</SearchSelectItem>
             <SearchSelectItem value="Coquimbo">Coquimbo</SearchSelectItem>
           </SearchSelect>
-          <TextInput
-            placeholder="Ingresa el nombre de la calle"
-            onChange={handleChange}
-            name="calle"
-          />
+          <div className=" rounded-lg shadow-lg">
+            <TextInput
+              placeholder="Ingresa el nombre de la calle"
+              onChange={handleChange}
+              name="calle"
+              maxLength={50}
+            />
+          </div>
           <TextInput
             placeholder="Ingresa el N° de la calle"
             onChange={handleChange}
             name="numero"
+            maxLength={20}
           />
         </div>
         <>
           <InfoComponent
-            title="Instrucciones"
+            title="Instrucciones para entrar"
             rectangles={rectanglesInst}
             selected={bookingData.detalles?.instrucciones}
             setSelected={(data) => handleSelection(data, 'instrucciones')}
@@ -152,6 +155,7 @@ export default function DetailsForm() {
             className="mx-2 max-w-lg"
             onChange={handleChange}
             name="adicionales"
+            maxLength={150}
           />
         </>
       </>

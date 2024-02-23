@@ -23,7 +23,7 @@ const TabsHero: React.FC<TabsHeroProps> = ({ tabs, className }) => {
   }
 
   return (
-    <div className={`mx-auto max-w-lg space-y-12 ${className}`}>
+    <div className={`mx-auto max-w-xl space-y-12 ${className}`}>
       <TabGroup index={activeTab} onIndexChange={handleChangeTab}>
         <TabList variant="line">
           {tabs.map((tab, index) => (

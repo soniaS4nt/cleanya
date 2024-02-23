@@ -1,4 +1,5 @@
 'use client'
+import { ReservationData } from '@/components/create-form'
 import { DetailI } from '@/components/details-form'
 import { RequerimientosI } from '@/components/infoComponent'
 import React, {
@@ -10,10 +11,9 @@ import React, {
 
 // Define el tipo para los datos recopilados en las pestañas
 export type BookingData = {
-  requerimientos: RequerimientosI
+  requirements: RequerimientosI
   detalles: DetailI
-  fecha: string | null
-  hora: string | null
+  fechaHora: ReservationData
   pago: string | null
 }
 
@@ -24,13 +24,15 @@ export interface InitialState {
 
 export const initialState: InitialState = {
   bookingData: {
-    requerimientos: {
-      habitaciones: null,
-      baños: null,
+    requirements: {
+      rooms: null,
+      bathrooms: null,
       tipo: null,
     },
-    fecha: '',
-    hora: '',
+    fechaHora: {
+      fecha: null,
+      hora: [],
+    },
     pago: '',
     detalles: {
       frecuencia: null,

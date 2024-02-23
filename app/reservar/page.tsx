@@ -22,23 +22,13 @@ async function Booking() {
       ),
     },
     {
-      title: 'Reserva la fecha',
+      title: 'Reserva fecha y hora',
       content: (
         <div>
           <p className="from-neutral-900 font-extrabold text-2xl">
             Reserva la fecha
           </p>
           <CreateForm data={data} />
-        </div>
-      ),
-    },
-    {
-      title: 'Reserva la hora',
-      content: (
-        <div>
-          <p className="from-neutral-900 font-extrabold text-2xl">
-            Reserva la hora
-          </p>
         </div>
       ),
     },
@@ -58,7 +48,6 @@ async function Booking() {
         </div>
       ),
     },
-    // Añade más objetos de pestaña según sea necesario
   ]
   return (
     <div className="h-screen">

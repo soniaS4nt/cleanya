@@ -1,4 +1,5 @@
 'use client'
+import { DetailI } from '@/components/details-form'
 import { RequerimientosI } from '@/components/infoComponent'
 import React, {
   PropsWithChildren,
@@ -10,6 +11,7 @@ import React, {
 // Define el tipo para los datos recopilados en las pestañas
 export type BookingData = {
   requerimientos: RequerimientosI
+  detalles: DetailI
   fecha: string | null
   hora: string | null
   pago: string | null
@@ -27,9 +29,20 @@ export const initialState: InitialState = {
       baños: null,
       tipo: null,
     },
-    fecha: null,
-    hora: null,
-    pago: null,
+    fecha: '',
+    hora: '',
+    pago: '',
+    detalles: {
+      frecuencia: null,
+      direccion: {
+        region: '',
+        comuna: '',
+        calle: '',
+        numero: '',
+        adicionales: '',
+      },
+      instrucciones: null,
+    },
   },
   setBookingData: () => {},
 }

@@ -1,7 +1,6 @@
 import CreateForm from '@/components/create-form'
 import DetailsForm from '@/components/details-form'
 import InfoForm from '@/components/info-form'
-import InfoComponent from '@/components/infoComponent'
 import TabsHero from '@/components/tabs'
 import { BookingProvider } from '@/contexts/bookingsContext'
 import { getData } from '@/lib/data'

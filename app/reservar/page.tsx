@@ -6,6 +6,7 @@ import { BookingProvider } from '@/contexts/bookingsContext'
 import { API_URL } from '@/lib/constants'
 import { getData } from '@/lib/data'
 
+export const dynamic = 'force-dynamic'
 async function Booking() {
   if (!API_URL) {
     return null

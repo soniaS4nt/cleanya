@@ -3,9 +3,13 @@ import DetailsForm from '@/components/details-form'
 import InfoForm from '@/components/info-form'
 import TabsHero from '@/components/tabs'
 import { BookingProvider } from '@/contexts/bookingsContext'
+import { API_URL } from '@/lib/constants'
 import { getData } from '@/lib/data'
 
 async function Booking() {
+  if (!API_URL) {
+    return null
+  }
   const hoursData = await getData()
   const { data } = hoursData
   //const appoiment = await postAppoiment()

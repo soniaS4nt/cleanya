@@ -4,8 +4,9 @@ import { appoimentMapper } from '@/lib/mappers/appoimentMapper'
 import hoursavailable from '@/models/hoursAvailable'
 import dayjs from 'dayjs'
 import mongoose from 'mongoose'
+import { dbConnect } from '@/lib/mongodb'
 
-export async function GET(request: Request) {
+/* export async function GET(request: Request) {
   try {
     const bookings = await appointment.find()
     return NextResponse.json(
@@ -19,9 +20,11 @@ export async function GET(request: Request) {
       { status: 500 }
     )
   }
-}
+} */
 
 export async function POST(request: NextRequest) {
+  dbConnect()
+
   const session = await mongoose.startSession()
   session.startTransaction()
 

@@ -108,7 +108,7 @@ export default function CreateForm({ data }: Props) {
   }
   async function postAppoiment(body: any) {
     try {
-      const res = await fetch(`${API_URL}/reservas`, {
+      const res = await fetch(`/api/reservas`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -168,4 +168,4 @@ export default function CreateForm({ data }: Props) {
     </form>
   )
 }
-export const dynamic = 'force-dynamic'
+/* export const dynamic = 'force-dynamic' */

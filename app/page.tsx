@@ -1,7 +1,8 @@
 import HeroSection from '@/components/heroSection'
+import { API_URL } from './lib/constants'
 
 export default function Home() {
-  if (!process.env.NEXT_PUBLIC_BASE_API_URL) {
+  if (!API_URL) {
     return null
   }
   return (

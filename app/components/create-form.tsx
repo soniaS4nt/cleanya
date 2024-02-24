@@ -107,7 +107,7 @@ export default function CreateForm({ data }: Props) {
   }
   async function postAppoiment(body: any) {
     try {
-      const res = await fetch(`${process.env.PATH}/reservas`, {
+      const res = await fetch(`${process.env.PATH_URL}/reservas`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

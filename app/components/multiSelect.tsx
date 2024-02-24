@@ -25,6 +25,7 @@ export default function MultiSelectComponent({
       onValueChange={handleChange}
       value={value}
       name="multiSelect"
+      id="multi"
     >
       {options && options.length > 0 ? (
         options.map((hours, index) => (

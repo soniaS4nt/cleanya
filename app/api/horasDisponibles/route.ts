@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-export async function POST(request: NextRequest) {
+export async function UPDATE(request: NextRequest) {
   try {
     const data = await request.json()
     const res = new hours(data)

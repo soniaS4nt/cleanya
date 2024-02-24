@@ -1,11 +1,24 @@
 import { Schema, Document, model, models } from 'mongoose'
 
-export type hoursDocument = Document
+interface Hour {
+  hours: string
+  available: boolean
+}
 
-const hoursSchemaAvailable = new Schema({
-  date: { type: String, require: true },
-  hours: { type: Array, require: true },
+interface HoursDocument extends Document {
+  date: Date
+  hours: Hour[]
+}
+
+const hoursSchemaAvailable = new Schema<HoursDocument>({
+  date: { type: Date, required: true },
+  hours: [
+    {
+      hours: { type: String, required: true },
+      available: { type: Boolean, default: true },
+    },
+  ],
 })
 
 export default models.hoursAvailable ||
-  model('hoursAvailable', hoursSchemaAvailable)
+  model<HoursDocument>('hoursAvailable', hoursSchemaAvailable)

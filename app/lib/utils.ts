@@ -10,7 +10,7 @@ type HorasDisponibles = {
 
 function generarHorasDisponibles(): HorasDisponibles[] {
   const horasDisponibles: HorasDisponibles[] = []
-  // Obtener la fecha actual
+  // Obtener la fecha actual AQUI DEBERIA SER LA ULTIMA FEHA DE LA BD
   const fechaActual = new Date() //o la ultima fecha de la base de datos
 
   // Iterar sobre los próximos 14 días laborables

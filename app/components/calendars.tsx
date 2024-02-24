@@ -63,6 +63,7 @@ export function DatePickerHero({ onValueChange, name }: Props) {
       placeholder="Seleccionar fecha..."
       color="blue"
       enableClear
+      id="calendar"
     />
   )
 }

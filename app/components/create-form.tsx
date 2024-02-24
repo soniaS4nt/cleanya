@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { DatePickerHero } from './calendars'
 import MultiSelectComponent, { Option } from './multiSelect'
 import dayjs from 'dayjs'
@@ -14,19 +14,38 @@ export interface ReservationData {
 }
 
 interface Props {
-  data: {
-    _id: string
-    date: string
-    hours: {
-      hours: string
-      available?: boolean
-    }[]
+  date: string
+  hours: {
+    hours: string
+    available?: boolean
   }[]
 }
 
-export default function CreateForm({ data }: Props) {
+export default function CreateForm() {
   const [options, setOptions] = useState<Option[]>([]) // Inicializar date como un array de cadenas
+  const [data, setData] = useState<Props[]>([])
   const { bookingData, setBookingData } = useBookingContext()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`/api/horasDisponibles`, {
+          cache: 'no-store',
+        })
+
+        if (!res.ok) {
+          throw new Error('Failed to fetch data')
+        }
+
+        const data = await res.json()
+        setData(data.data)
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+
+    fetchData()
+  }, [])
 
   const handleChange = (value: DatePickerValue) => {
     setOptions([])
@@ -41,10 +60,10 @@ export default function CreateForm({ data }: Props) {
     const newValue = dayjs(value).format('D/M/YYYY')
 
     if (value) {
-      const dateFilter = data.find((bookings) => bookings.date === newValue)
+      const dateFilter = data?.find((bookings) => bookings.date === newValue)
       console.log({
         newValue: newValue,
-        value: data.map((d) => d.date),
+        value: data?.map((d) => d.date),
       })
 
       if (dateFilter) {
@@ -129,7 +148,6 @@ export default function CreateForm({ data }: Props) {
       throw error
     }
   }
-  console.log(bookingData)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()

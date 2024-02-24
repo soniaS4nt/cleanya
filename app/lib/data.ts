@@ -1,6 +1,5 @@
 import { API_URL } from './constants'
 
-export const dynamic = 'force-dynamic'
 export async function getData() {
   try {
     const res = await fetch(`${API_URL}/api/horasDisponibles `, {

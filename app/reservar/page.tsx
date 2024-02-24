@@ -3,17 +3,8 @@ import DetailsForm from '@/components/details-form'
 import InfoForm from '@/components/info-form'
 import TabsHero from '@/components/tabs'
 import { BookingProvider } from '@/contexts/bookingsContext'
-import { API_URL } from '@/lib/constants'
-import { getData } from '@/lib/data'
 
-export const dynamic = 'force-dynamic'
 async function Booking() {
-  if (!API_URL) {
-    return null
-  }
-  const hoursData = await getData()
-  const { data } = hoursData
-  //const appoiment = await postAppoiment()
   const tabs = [
     {
       title: 'Requerimientos',
@@ -33,7 +24,7 @@ async function Booking() {
           <p className="from-neutral-900 font-extrabold text-2xl">
             Reserva la fecha
           </p>
-          <CreateForm data={data} />
+          <CreateForm />
         </div>
       ),
     },

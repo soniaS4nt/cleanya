@@ -109,7 +109,7 @@ export default function CreateForm({ data }: Props) {
   async function postAppoiment(body: any) {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_API_URL}/reservas`,
+        process.env.NEXT_PUBLIC_BASE_API_URL + '/reservas',
         {
           method: 'POST',
           headers: {

@@ -3,9 +3,12 @@ import { API_URL } from './constants'
 
 export async function getData() {
   try {
-    const res = await fetch(`${API_URL}/api/horasDisponibles `, {
-      cache: 'no-store', // next: { revalidate: 1000 }, sacar era para refrescar la dsata de la bd
-    })
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/horasDisponibles `,
+      {
+        cache: 'no-store', // next: { revalidate: 1000 }, sacar era para refrescar la dsata de la bd
+      }
+    )
     if (!res.ok) {
       throw new Error('Failed to fetch data')
     }

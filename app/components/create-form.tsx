@@ -108,13 +108,16 @@ export default function CreateForm({ data }: Props) {
   }
   async function postAppoiment(body: any) {
     try {
-      const res = await fetch(`${API_URL}/reservas`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-      })
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_API_URL}/reservas`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(body),
+        }
+      )
 
       if (!res.ok) {
         // Aquí maneja la situación en la que la solicitud no fue exitosa (por ejemplo, error de servidor)

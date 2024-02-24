@@ -106,13 +106,9 @@ export default function CreateForm({ data }: Props) {
       },
     }))
   }
-
-  const API = process.env.NEXT_PUBLIC_BASE_API_URL + '/reservas'
-  console.log('esta es la url de create', API)
-
   async function postAppoiment(body: any) {
     try {
-      const res = await fetch(API, {
+      const res = await fetch(`${API_URL}/reservas`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -172,3 +168,4 @@ export default function CreateForm({ data }: Props) {
     </form>
   )
 }
+export const dynamic = 'force-dynamic'

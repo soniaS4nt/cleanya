@@ -2,7 +2,7 @@ import { revalidatePath, unstable_cache } from 'next/cache'
 
 export async function getData() {
   try {
-    const res = await fetch('http://localhost:3001/api/horasDisponibles', {
+    const res = await fetch(`${process.env.PATH}/api/horasDisponibles `, {
       cache: 'no-store', // next: { revalidate: 1000 }, sacar era para refrescar la dsata de la bd
     })
     if (!res.ok) {

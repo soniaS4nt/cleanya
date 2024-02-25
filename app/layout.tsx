@@ -10,6 +10,22 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'CleanYa App',
   description: 'Empresa dedicada a la limpieza',
+  openGraph: {
+    type: 'website',
+    url: 'https://cleanya.shop/',
+  },
+  keywords: [
+    'limpieza',
+    'limpieza de alfombras',
+    'servicio de limpieza',
+    'limpieza profesional',
+    'limpieza a domicilio',
+    'empresa de limpieza',
+    'limpieza de interiores',
+    'limpieza de exteriores',
+    'limpieza de hogar',
+    'limpieza residencial',
+  ],
 }
 
 export default function RootLayout({

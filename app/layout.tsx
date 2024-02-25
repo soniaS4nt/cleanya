@@ -22,7 +22,6 @@ export default function RootLayout({
       <body className={inter.className}>
         <TopNav />
         {children}
-        <FooterSection />
         <Toaster />
       </body>
     </html>

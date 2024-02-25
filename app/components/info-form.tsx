@@ -3,7 +3,7 @@ import React from 'react'
 import InfoComponent, { RectangleType } from './infoComponent'
 import { useBookingContext } from '@/contexts/bookingsContext'
 
-export default function InfoForm() {
+export default function InfoForm({ className }: { className: string }) {
   const { bookingData, setBookingData } = useBookingContext()
 
   const handleSelection = (data: RectangleType | null, field: string) => {
@@ -50,7 +50,7 @@ export default function InfoForm() {
   }
 
   return (
-    <>
+    <div className={className}>
       <InfoComponent
         rectangles={rectanglesHabitaciones}
         title={titleHabitaciones}
@@ -72,6 +72,6 @@ export default function InfoForm() {
         selected={bookingData.requirements?.tipo}
         setSelected={(data) => handleSelection(data, 'tipo')}
       />
-    </>
+    </div>
   )
 }

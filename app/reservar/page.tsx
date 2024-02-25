@@ -4,7 +4,7 @@ import InfoForm from '@/components/info-form'
 import TabsHero from '@/components/tabs'
 import { BookingProvider } from '@/contexts/bookingsContext'
 
-async function Booking() {
+function Booking() {
   const tabs = [
     {
       title: 'Requerimientos',
@@ -13,7 +13,7 @@ async function Booking() {
           <p className="from-neutral-900 font-extrabold text-2xl">
             Adapta tus requisitos según tus necesidades
           </p>
-          <InfoForm />
+          <InfoForm className={''} />
         </div>
       ),
     },
@@ -24,7 +24,7 @@ async function Booking() {
           <p className="from-neutral-900 font-extrabold text-2xl">
             Reserva la fecha
           </p>
-          <CreateForm />
+          <CreateForm className="'flex flex-col items-center pt-16 my-5'" />
         </div>
       ),
     },
@@ -32,7 +32,7 @@ async function Booking() {
       title: 'Detalles',
       content: (
         <div>
-          <DetailsForm />
+          <DetailsForm className="" />
         </div>
       ),
     },
@@ -46,7 +46,7 @@ async function Booking() {
     },
   ]
   return (
-    <div className="h-screen">
+    <div className="h-screen m-2">
       <BookingProvider>
         <TabsHero tabs={tabs} className="mt-16" />
       </BookingProvider>

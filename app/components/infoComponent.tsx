@@ -29,7 +29,7 @@ export default function InfoComponent({
   return (
     <div className="m-2">
       <small className="font-semibold text-gray-400">{title}</small>
-      <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {rectangles?.map((rectangle) => (
           <div
             key={rectangle.id}

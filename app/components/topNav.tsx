@@ -109,7 +109,7 @@ export default function TopNav() {
           )}
         </button>
       </div>
-      <div className=" h-16 w-full hidden sm:flex gap-0 flex-row justify-between items-center">
+      <div className="bg-white h-16 w-full hidden sm:flex gap-0 flex-row justify-between items-center">
         <Image
           src="/logo.svg"
           alt=""

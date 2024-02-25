@@ -3,7 +3,7 @@ import ContactSection from '@/components/contactSection'
 export default function Page() {
   return (
     <>
-      <header className="flex flex-col items-center justify-center pt-16 my-5 md:bg-[url('/aboutHeroDesk.svg')] bg-no-repeat bg-contain md:w-screen md:h-screen">
+      <header className="flex flex-col m-10 items-center justify-center pt-16 my-5 md:bg-[url('/aboutHeroDesk.svg')] bg-no-repeat bg-contain md:w-screen md:h-screen">
         <h1 className="lg:font-extrabold font-bold text-4xl text-center">
           Sobre CleanYa
         </h1>

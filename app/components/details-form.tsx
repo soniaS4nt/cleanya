@@ -22,7 +22,7 @@ export interface DetailI {
   direccion: Direccion
   instrucciones: RectangleType | null
 }
-export default function DetailsForm() {
+export default function DetailsForm({ className }: { className: string }) {
   const { bookingData, setBookingData } = useBookingContext()
 
   const handleSelection = (data: RectangleType | string, field: string) => {
@@ -90,11 +90,11 @@ export default function DetailsForm() {
     },
     {
       id: 4,
-      value: 'otro...',
+      value: 'Otros...',
     },
   ]
   return (
-    <div>
+    <div className={className}>
       <div>
         <p className="from-neutral-900 font-extrabold text-2xl">
           Selecciona la frecuencia
@@ -111,20 +111,24 @@ export default function DetailsForm() {
         <p className="from-neutral-900 font-extrabold text-2xl">
           Agrega tu dirección y detalles extras
         </p>
-        <div className="grid grid-cols-2 gap-2">
-          <SearchSelect
-            placeholder="Región"
-            onValueChange={(value) => handleOnValue(value, 'region')}
-          >
-            <SearchSelectItem value="Coquimbo">Coquimbo</SearchSelectItem>
-          </SearchSelect>
-          <SearchSelect
-            placeholder="Comuna"
-            onValueChange={(value) => handleOnValue(value, 'comuna')}
-          >
-            <SearchSelectItem value="La serena">La serena</SearchSelectItem>
-            <SearchSelectItem value="Coquimbo">Coquimbo</SearchSelectItem>
-          </SearchSelect>
+        <div className="grid sm:grid-cols-2 gap-3">
+          <div className=" rounded-lg shadow-lg">
+            <SearchSelect
+              placeholder="Región"
+              onValueChange={(value) => handleOnValue(value, 'region')}
+            >
+              <SearchSelectItem value="Coquimbo">Coquimbo</SearchSelectItem>
+            </SearchSelect>
+          </div>
+          <div className=" rounded-lg shadow-lg">
+            <SearchSelect
+              placeholder="Comuna"
+              onValueChange={(value) => handleOnValue(value, 'comuna')}
+            >
+              <SearchSelectItem value="La serena">La serena</SearchSelectItem>
+              <SearchSelectItem value="Coquimbo">Coquimbo</SearchSelectItem>
+            </SearchSelect>
+          </div>
           <div className=" rounded-lg shadow-lg">
             <TextInput
               placeholder="Ingresa el nombre de la calle"
@@ -133,12 +137,14 @@ export default function DetailsForm() {
               maxLength={50}
             />
           </div>
-          <TextInput
-            placeholder="Ingresa el N° de la calle"
-            onChange={handleChange}
-            name="numero"
-            maxLength={20}
-          />
+          <div className=" rounded-lg shadow-lg">
+            <TextInput
+              placeholder="Ingresa el N° de la calle"
+              onChange={handleChange}
+              name="numero"
+              maxLength={20}
+            />
+          </div>
         </div>
         <>
           <InfoComponent
@@ -152,7 +158,7 @@ export default function DetailsForm() {
           </small>
           <Textarea
             placeholder="Ejemplo: --"
-            className="mx-2 max-w-lg"
+            className=""
             onChange={handleChange}
             name="adicionales"
             maxLength={150}

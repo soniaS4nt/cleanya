@@ -21,7 +21,7 @@ interface Props {
   }[]
 }
 
-export default function CreateForm() {
+export default function CreateForm({ className }: { className: string }) {
   const [options, setOptions] = useState<Option[]>([]) // Inicializar date como un array de cadenas
   const [data, setData] = useState<Props[]>([])
   const { bookingData, setBookingData } = useBookingContext()
@@ -166,14 +166,11 @@ export default function CreateForm() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={'flex flex-col items-center pt-16 my-5'}
-    >
-      <div className="shadow-lg rounded-lg min-w-72 mb-10">
+    <form onSubmit={handleSubmit} className={className}>
+      <div className="min-w-72 mb-10">
         <DatePickerHero onValueChange={handleChange} />
       </div>
-      <div className="shadow-lg rounded-lg min-w-72 ">
+      <div className="min-w-72 ">
         <MultiSelectComponent
           onValueChange={handleChangeHours}
           options={options}

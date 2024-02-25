@@ -7,7 +7,7 @@ export default function ContactSection() {
       id="contact"
       className="flex flex-col items-center justify-center min-h-96 bg-[rgb(216,216,216)]"
     >
-      <div className="flex flex-col md:w-2/4 text-center">
+      <div className="flex flex-col m-10 md:w-2/4 text-center">
         <h1 className="lg:font-extrabold font-bold text-4xl text-center m-3">
           Contáctanos
         </h1>
@@ -16,12 +16,18 @@ export default function ContactSection() {
           illum quisquam voluptas facere odit omnis facilis minus possimus rem,
           expedita eos quibusdam ab qui dolorum hic magnam quae saepe. Quas.
         </p>
-        <div className="flex flex-col sm:flex-row justify-between m-3">
+        <div className="flex flex-col gap-4 sm:flex-row justify-between m-3">
           <ul>
             <li className="flex flex-row justify-between">
-              <p> lunes-viernes</p>
+              <p>Lun - Sáb</p>
               <p className="text-tremor-brand font-extrabold mx-2">
-                08:00 -19:00
+                09:00 -19:00
+              </p>
+            </li>
+            <li className="flex flex-row justify-between">
+              <p>Domingo</p>
+              <p className="text-tremor-brand font-extrabold mx-2">
+                10:00 - 14:00
               </p>
             </li>
           </ul>

@@ -1,6 +1,8 @@
 import LocationIcon from '@/components/icons/locationIcon'
 import PhoneIcon from './icons/phoneIcon'
 import MailIcon from './icons/mailIcon'
+import Link from 'next/link'
+
 export default function ContactSection() {
   return (
     <section
@@ -12,11 +14,11 @@ export default function ContactSection() {
           Contáctanos
         </h1>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur
-          illum quisquam voluptas facere odit omnis facilis minus possimus rem,
-          expedita eos quibusdam ab qui dolorum hic magnam quae saepe. Quas.
+          ¡Tu satisfacción es nuestra prioridad número uno! ¿Tienes alguna
+          pregunta, inquietud o simplemente quieres decir hola? ¡Estamos aquí
+          para ayudarte!
         </p>
-        <div className="flex flex-col gap-4 sm:flex-row justify-between m-3">
+        <div className="flex flex-col mt-10 gap-9 sm:flex-row justify-between m-3">
           <ul>
             <li className="flex flex-row justify-between">
               <p>Lun - Sáb</p>
@@ -34,13 +36,17 @@ export default function ContactSection() {
           <ul>
             <li className="flex flex-row">
               <LocationIcon />
-              <p className="mx-2">La serena, Coquimbo</p>
+              <p className="mx-2 text-sm">La serena, Coquimbo</p>
             </li>
             <li className="flex flex-row">
               <PhoneIcon />
+              <p className="mx-2 text-sm">Tel: xxxxxxxx</p>
             </li>
             <li className="flex flex-row">
-              <MailIcon />
+              <Link href="mailto:soniachaparro21@gmail.com">
+                <MailIcon />
+              </Link>
+              <p className="mx-2 text-sm">Correo electrónico</p>
             </li>
           </ul>
         </div>

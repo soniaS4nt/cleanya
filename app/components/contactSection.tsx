@@ -40,13 +40,13 @@ export default function ContactSection() {
             </li>
             <li className="flex flex-row">
               <PhoneIcon />
-              <p className="mx-2 text-sm">Tel: xxxxxxxx</p>
+              <p className="mx-2 text-sm">+56 9 5646 8634</p>
             </li>
             <li className="flex flex-row">
-              <Link href="mailto:soniachaparro21@gmail.com">
+              <Link href="mailto:cleanya.ayuda@gmail.com">
                 <MailIcon />
               </Link>
-              <p className="mx-2 text-sm">Correo electrónico</p>
+              <p className="mx-2 text-sm">cleanya.ayuda@gmail.com</p>
             </li>
           </ul>
         </div>

@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import ButtonLogin from './buttonLogin'
 
 const links = [
   {
@@ -128,6 +129,7 @@ export default function TopNav() {
               {name}
             </Link>
           ))}
+          <ButtonLogin href={'/auth/login'} key={'btn'} />
         </div>
       </div>
       {isMobileMenuOpen && (
@@ -147,6 +149,7 @@ export default function TopNav() {
               {name}
             </Link>
           ))}
+          <ButtonLogin href={'/login'} key={'btn'} />
         </div>
       )}
     </nav>

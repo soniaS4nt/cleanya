@@ -1,9 +1,24 @@
-export async function createBooking(prevState: any, formData: any) {
-  // Validate form fields using Zod
-  const validatedFields = {
-    date: formData.get('picker'),
-    hours: formData.getAll('multiSelect'),
-  }
+'use server'
+import { signIn } from '../../auth'
+import { AuthError } from 'next-auth'
 
-  console.log(validatedFields, 'actions')
+// ...
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData
+) {
+  try {
+    await signIn('credentials', formData)
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return 'Invalid credentials.'
+        default:
+          return 'Something went wrong.'
+      }
+    }
+    throw error
+  }
 }

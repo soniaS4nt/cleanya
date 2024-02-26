@@ -45,7 +45,7 @@ export default function CreateForm({ className }: { className: string }) {
     }
 
     fetchData()
-  }, [])
+  }, [options])
 
   const handleChange = (value: DatePickerValue) => {
     setOptions([])
@@ -136,8 +136,9 @@ export default function CreateForm({ className }: { className: string }) {
       })
 
       if (!res.ok) {
-        // Aquí maneja la situación en la que la solicitud no fue exitosa (por ejemplo, error de servidor)
-        throw new Error('Error al enviar la solicitud')
+        toast.warning('Faltan campos por llenar', {
+          position: 'bottom-center',
+        })
       }
 
       // Si la solicitud fue exitosa, puedes manejar la respuesta si es necesario

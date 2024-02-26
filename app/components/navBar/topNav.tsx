@@ -118,7 +118,12 @@ export default function TopNav() {
               {name}
             </Link>
           ))}
-          <ButtonLogin href={'/auth/login'} key={'btn'} />
+
+          <ButtonLogin
+            href={'/auth/login'}
+            key={'btn'}
+            onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+          />
         </div>
       )}
     </nav>

@@ -16,14 +16,14 @@ export default function LoginPage() {
           <p className="font-bold">Inicia sesión</p>
         </div>
         <LoginForm />
-        <p className="text-center text-sm">
+        {/*  <p className="text-center text-sm">
           ¿Aún no tienes una cuenta?{' '}
           <Link href={'/auth/signUp'}>
             <span className="text-tremor-brand font-bold text-sm">
               Regístrate
             </span>
           </Link>
-        </p>
+        </p> */}
       </div>
     </main>
   )

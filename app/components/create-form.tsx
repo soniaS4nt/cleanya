@@ -6,7 +6,6 @@ import dayjs from 'dayjs'
 import { DatePickerValue } from '@tremor/react'
 import { toast } from 'sonner'
 import { initialState, useBookingContext } from '@/contexts/bookingsContext'
-import { API_URL } from '@/lib/constants'
 
 export interface ReservationData {
   fecha: DatePickerValue | null

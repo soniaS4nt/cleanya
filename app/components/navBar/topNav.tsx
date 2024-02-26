@@ -2,7 +2,8 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import ButtonLogin from './buttonLogin'
+import ButtonLogin from '../buttonLogin'
+import { auth } from '../../../auth'
 
 const links = [
   {
@@ -24,43 +25,11 @@ const links = [
 
 export default function TopNav() {
   const [activeSection, setActiveSection] = useState('')
-  const [isMenuInteracted, setMenuInteracted] = useState(false)
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen)
   }
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!isMenuInteracted) {
-        const scrollPosition = window.scrollY
-
-        for (const link of links) {
-          const sectionElement = document.getElementById(link.href.substring(1))
-
-          if (sectionElement) {
-            const sectionTop = sectionElement.offsetTop - 200
-            const sectionBottom = sectionTop + sectionElement.offsetHeight
-
-            if (
-              scrollPosition >= sectionTop &&
-              scrollPosition < sectionBottom
-            ) {
-              setActiveSection(link.href)
-              break
-            }
-          }
-        }
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [isMenuInteracted])
 
   return (
     <nav className="fixed top-0 w-full z-10 mb-4 shadow">
@@ -149,7 +118,7 @@ export default function TopNav() {
               {name}
             </Link>
           ))}
-          <ButtonLogin href={'/login'} key={'btn'} />
+          <ButtonLogin href={'/auth/login'} key={'btn'} />
         </div>
       )}
     </nav>

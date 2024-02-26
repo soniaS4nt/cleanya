@@ -13,7 +13,7 @@ export default function ButtonLogin<T extends string>({
       href={href}
       className={`border-tremor-brand border-2 rounded-lg text-center p-2 text-tremor-brand min-w-4 font-semibold m-6 shadow-md ${className}`}
     >
-      <button type="button">Inicia sesión</button>
+      <button type="button">Inicia sessión</button>
     </Link>
   )
 }

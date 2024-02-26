@@ -1,14 +1,23 @@
 import { dbConnect } from '@/lib/mongodb'
 import { NextRequest, NextResponse } from 'next/server'
 import hoursavailable from '@/models/hoursAvailable'
+import { auth } from '../../../auth'
 
 export async function GET(request: NextRequest) {
   dbConnect()
   try {
-    const hoursAvailable = await hoursavailable.find()
-    console.log(hoursAvailable)
+    const session = await auth()
 
-    return NextResponse.json({ data: hoursAvailable }, { status: 200 })
+    if (session) {
+      // Do something with the session
+      const hoursAvailable = await hoursavailable.find()
+
+      return NextResponse.json({ data: hoursAvailable }, { status: 200 })
+    }
+    return NextResponse.json(
+      { message: 'You must be signed in.' },
+      { status: 401 }
+    )
   } catch (e) {
     console.error(e)
     return NextResponse.json(

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import TopNav from '@/components/topNav'
+import TopNav from '@/components/navBar/topNav'
 import { Toaster } from 'sonner'
 import FooterSection from './components/footerSection'
 

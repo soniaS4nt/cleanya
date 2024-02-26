@@ -22,17 +22,6 @@ export const authConfig = {
       // Permitir acceso a todas las demás páginas para usuarios no autenticados
       return true
     },
-    /* authorized({ auth, request: { nextUrl } }) {
-      const isLoggedIn = !!auth?.user
-      const isOnBooking = nextUrl.pathname.startsWith('/reservar')
-      if (isOnBooking) {
-        if (isLoggedIn) return true
-        return false // Redirect unauthenticated users to login page
-      } else if (isLoggedIn) {
-        return Response.redirect(new URL('/reservar', nextUrl))
-      }
-      return true
-    }, */
   },
   providers: [], // Add providers with an empty array for now
 } satisfies NextAuthConfig

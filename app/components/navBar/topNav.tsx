@@ -2,64 +2,34 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import ButtonLogin from '../buttonLogin'
+import { auth } from '../../../auth'
 
 const links = [
   {
     icon: '',
-    href: '#inicio',
+    href: '/',
     name: 'Inicio',
   },
   {
     icon: '',
-    href: '#about',
+    href: '/aboutUs',
     name: 'Sobre nosotros',
   },
   {
     icon: '',
-    href: '#contact',
+    href: '/aboutUs#contact',
     name: 'Contacto',
   },
 ]
 
 export default function TopNav() {
   const [activeSection, setActiveSection] = useState('')
-  const [isMenuInteracted, setMenuInteracted] = useState(false)
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen)
   }
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!isMenuInteracted) {
-        const scrollPosition = window.scrollY
-
-        for (const link of links) {
-          const sectionElement = document.getElementById(link.href.substring(1))
-
-          if (sectionElement) {
-            const sectionTop = sectionElement.offsetTop - 200
-            const sectionBottom = sectionTop + sectionElement.offsetHeight
-
-            if (
-              scrollPosition >= sectionTop &&
-              scrollPosition < sectionBottom
-            ) {
-              setActiveSection(link.href)
-              break
-            }
-          }
-        }
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [isMenuInteracted])
 
   return (
     <nav className="fixed top-0 w-full z-10 mb-4 shadow">
@@ -109,7 +79,7 @@ export default function TopNav() {
           )}
         </button>
       </div>
-      <div className=" h-16 w-full hidden sm:flex gap-0 flex-row justify-between items-center">
+      <div className="bg-white h-16 w-full hidden sm:flex gap-0 flex-row justify-between items-center">
         <Image
           src="/logo.svg"
           alt=""
@@ -128,6 +98,7 @@ export default function TopNav() {
               {name}
             </Link>
           ))}
+          <ButtonLogin href={'/auth/login'} key={'btn'} />
         </div>
       </div>
       {isMobileMenuOpen && (
@@ -141,12 +112,18 @@ export default function TopNav() {
               href={href}
               key={name}
               onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
-              className={`text-2xl font-extrabold justify-center items-center gap-1.5 flex p-2'
+              className={`text-2xl font-extrabold justify-center items-center m-2 flex p-2'
                   ${href === activeSection ? 'text-blue-700' : ''}`}
             >
               {name}
             </Link>
           ))}
+
+          <ButtonLogin
+            href={'/auth/login'}
+            key={'btn'}
+            onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+          />
         </div>
       )}
     </nav>

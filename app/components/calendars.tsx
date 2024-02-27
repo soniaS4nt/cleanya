@@ -12,6 +12,7 @@ import { es } from 'date-fns/locale'
 type Props = {
   name?: string
   title?: string
+  value: DatePickerValue
   onValueChange: (date: DatePickerValue) => void
 }
 export function DateRangePickerHero({ title }: Props) {
@@ -45,12 +46,12 @@ export function DateRangePickerHero({ title }: Props) {
   )
 }
 
-export function DatePickerHero({ onValueChange, name }: Props) {
-  const [value, setValue] = useState<DatePickerValue>()
+export function DatePickerHero({ onValueChange, value }: Props) {
+  /*   const [value, setValue] = useState<DatePickerValue>() */
 
   // Función para manejar cambios en la selección de fecha
   const handleChange = (newValue: DatePickerValue) => {
-    setValue(newValue) // Actualiza el estado con la nueva fecha
+    /*  setValue(newValue) // Actualiza el estado con la nueva fecha */
     onValueChange(newValue) // Llama a la función proporcionada con la nueva fecha
   }
 

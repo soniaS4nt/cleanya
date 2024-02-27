@@ -5,7 +5,6 @@ import { useBookingContext } from '@/contexts/bookingsContext'
 import {
   SearchSelect,
   SearchSelectItem,
-  Select,
   TextInput,
   Textarea,
 } from '@tremor/react'
@@ -159,6 +158,7 @@ export default function DetailsForm({ className }: { className: string }) {
           <Textarea
             placeholder="Ejemplo: --"
             className=""
+            value={bookingData.detalles?.direccion?.adicionales}
             onChange={handleChange}
             name="adicionales"
             maxLength={150}

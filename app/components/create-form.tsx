@@ -47,7 +47,9 @@ export default function CreateForm({ className }: { className: string }) {
   }, [options])
 
   const handleChange = (value: DatePickerValue) => {
-    setOptions([])
+    bookingData.fechaHora.hora = []
+    const newValue = dayjs(value).format('D/M/YYYY')
+
     setBookingData((prevData) => ({
       ...prevData,
       fechaHora: {
@@ -56,58 +58,26 @@ export default function CreateForm({ className }: { className: string }) {
       },
     }))
 
-    const newValue = dayjs(value).format('D/M/YYYY')
-
     if (value) {
       const dateFilter = data?.find((bookings) => bookings.date === newValue)
-      console.log({
-        newValue: newValue,
-        value: data?.map((d) => d.date),
-      })
 
       if (dateFilter) {
-        // Filtrar las horas disponibles
-        const availableHours = dateFilter.hours.filter(
-          (hour) => hour.available === true
-        )
-
-        // Actualizar las opciones con las horas disponibles
+        const availableHours = dateFilter.hours
+          .filter((hour) => hour.available)
+          .map((hour) => ({
+            hours: hour.hours,
+            available: hour.available,
+          }))
         setOptions(availableHours)
       } else {
-        // Si no se encuentra ninguna reserva para la fecha seleccionada, limpiar las opciones
         setOptions([])
       }
-      /*  return dateFilter ? setOptions(dateFilter.hours) : setOptions([]) */
     }
   }
-  const clearBookingData = () => {
-    setBookingData({
-      requirements: {
-        rooms: null,
-        bathrooms: null,
-        tipo: null,
-      },
-      fechaHora: {
-        fecha: null,
-        hora: [],
-      },
-      pago: '',
-      detalles: {
-        frecuencia: null,
-        direccion: {
-          region: '',
-          comuna: '',
-          calle: '',
-          numero: '',
-          adicionales: '',
-        },
-        instrucciones: null,
-      },
-    })
-  }
+
   const clearBookingDataAndForm = () => {
     // Limpiar los datos del contexto
-    clearBookingData()
+    setBookingData(initialState.bookingData)
 
     // Restablecer los valores de los campos del formulario
     const inputs = document.querySelectorAll('input')
@@ -115,6 +85,7 @@ export default function CreateForm({ className }: { className: string }) {
       input.value = ''
     })
   }
+
   const handleChangeHours = (value: string[]) => {
     setBookingData((prevData) => ({
       ...prevData,
@@ -124,6 +95,7 @@ export default function CreateForm({ className }: { className: string }) {
       },
     }))
   }
+
   async function postAppoiment(body: any) {
     try {
       const res = await fetch(`/api/reservas`, {
@@ -168,10 +140,14 @@ export default function CreateForm({ className }: { className: string }) {
   return (
     <form onSubmit={handleSubmit} className={className}>
       <div className="min-w-72 mb-10">
-        <DatePickerHero onValueChange={handleChange} />
+        <DatePickerHero
+          onValueChange={handleChange}
+          value={bookingData.fechaHora?.fecha as DatePickerValue}
+        />
       </div>
       <div className="min-w-72 ">
         <MultiSelectComponent
+          value={bookingData.fechaHora?.hora}
           onValueChange={handleChangeHours}
           options={options}
         />

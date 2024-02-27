@@ -1,4 +1,5 @@
 import { MultiSelect, MultiSelectItem } from '@tremor/react'
+import { useEffect } from 'react'
 
 export type Option = {
   hours: string
@@ -18,6 +19,7 @@ export default function MultiSelectComponent({
   const handleChange = (newValue: string[]) => {
     onValueChange(newValue) // Pasar el nuevo valor al prop onValueChange
   }
+  console.log({ options: options, values: value, onValueChange: onValueChange })
 
   return (
     <MultiSelect
@@ -25,7 +27,7 @@ export default function MultiSelectComponent({
       onValueChange={handleChange}
       value={value}
       name="multiSelect"
-      id="multi"
+      key="multi"
     >
       {options && options.length > 0 ? (
         options.map((hours, index) => (

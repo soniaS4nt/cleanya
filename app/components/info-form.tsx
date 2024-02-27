@@ -44,11 +44,6 @@ export default function InfoForm({ className }: { className: string }) {
     { id: 14, value: 'Post Cosntrucción' },
   ]
 
-  const handleSubmit = () => {
-    // No necesitas enviar los datos al backend aquí, ya que se manejará en el componente Booking
-    console.log('Datos de reserva actualizados:', bookingData)
-  }
-
   return (
     <div className={className}>
       <InfoComponent

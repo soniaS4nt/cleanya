@@ -19,7 +19,6 @@ export default function MultiSelectComponent({
   const handleChange = (newValue: string[]) => {
     onValueChange(newValue) // Pasar el nuevo valor al prop onValueChange
   }
-  console.log({ options: options, values: value, onValueChange: onValueChange })
 
   return (
     <MultiSelect

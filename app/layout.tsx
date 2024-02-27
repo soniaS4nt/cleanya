@@ -6,14 +6,14 @@ import { Toaster } from 'sonner'
 import FooterSection from './components/footerSection'
 
 const inter = Inter({ subsets: ['latin'] })
-
+/*  title: {
+    template: '%s | Acme Dashboard',
+    default: 'Acme Dashboard',
+  }, */
 export const metadata: Metadata = {
-  title: 'CleanYa App',
+  title: { template: '%s | CleanYA', default: 'CleanYa App' },
   description: 'Empresa dedicada a la limpieza',
-  openGraph: {
-    type: 'website',
-    url: 'https://cleanya.shop/',
-  },
+  metadataBase: new URL('https://cleanya.shop'),
   keywords: [
     'limpieza',
     'limpieza de alfombras',

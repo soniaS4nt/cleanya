@@ -1,6 +1,11 @@
 import ButtonBooking from '@/components/buttonBooking'
 import ContactSection from '@/components/contactSection'
+import { Metadata } from 'next'
 import Image from 'next/image'
+
+export const metadata: Metadata = {
+  title: 'Sobre nosotros',
+}
 
 export default function Page() {
   return (

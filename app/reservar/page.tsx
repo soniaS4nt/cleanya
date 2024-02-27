@@ -3,7 +3,11 @@ import DetailsForm from '@/components/details-form'
 import InfoForm from '@/components/info-form'
 import TabsHero from '@/components/tabs'
 import { BookingProvider } from '@/contexts/bookingsContext'
+import { Metadata } from 'next'
 
+export const metadata: Metadata = {
+  title: 'Reserva tu limpieza',
+}
 function Booking() {
   const tabs = [
     {

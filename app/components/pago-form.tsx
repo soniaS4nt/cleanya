@@ -8,7 +8,7 @@ const client = new MercadoPagoConfig({
   accessToken: process.env.YOUR_ACCESS_TOKEN!,
 })
 
-export default function PagoForm() {
+export default async function PagoForm() {
   async function pagar(formData: FormData) {
     'use server'
     const preference = await new Preference(client).create({

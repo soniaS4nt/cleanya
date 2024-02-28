@@ -12,10 +12,10 @@ export async function POST(request: NextRequest) {
     .json()
     .then((data) => data as { data: { id: string } })
   // sguridad en prod
-  /*  const secret = request.headers.get('x-signature-id')
-    if (secret !== process.env.SECRET_KEY_MP) {
-      return Response.json({ succes: false })
-    } */
+  const secret = request.headers.get('x-signature-id')
+  if (secret !== process.env.SECRET_KEY_MP) {
+    return Response.json({ succes: false })
+  }
 
   const payment = await new Payment(client).get({ id: body.data.id })
   const bookingPayment = {

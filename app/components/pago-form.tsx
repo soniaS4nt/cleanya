@@ -21,6 +21,9 @@ export default function PagoForm() {
             unit_price: Number(formData.get('total')),
           },
         ],
+        back_urls: {
+          success: 'https://cleanya-git-dev-sonias4nt.vercel.app/',
+        },
       },
     })
     redirect(preference.sandbox_init_point!)

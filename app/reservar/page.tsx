@@ -1,6 +1,7 @@
 import CreateForm from '@/components/create-form'
 import DetailsForm from '@/components/details-form'
 import InfoForm from '@/components/info-form'
+import PagoForm from '@/components/pago-form'
 import TabsHero from '@/components/tabs'
 import { BookingProvider } from '@/contexts/bookingsContext'
 import { Metadata } from 'next'
@@ -45,6 +46,7 @@ function Booking() {
       content: (
         <div>
           <p className="from-neutral-900 font-extrabold text-2xl">El pago</p>
+          <PagoForm />
         </div>
       ),
     },

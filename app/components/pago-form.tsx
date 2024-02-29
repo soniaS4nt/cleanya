@@ -3,6 +3,11 @@ import { TextInput } from '@tremor/react'
 import { MercadoPagoConfig, Preference } from 'mercadopago'
 import { redirect } from 'next/navigation'
 
+const URL =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000'
+    : 'https://cleanya-git-dev-sonias4nt.vercel.app'
+
 // Agrega credenciales
 const client = new MercadoPagoConfig({
   accessToken: process.env.YOUR_ACCESS_TOKEN!,
@@ -23,9 +28,9 @@ export default async function PagoForm() {
         ],
         auto_return: 'approved',
         back_urls: {
-          success: 'https://cleanya-git-dev-sonias4nt.vercel.app/',
+          success: `${URL}`,
         },
-        /*   notification_url: '', */
+        notification_url: URL + '/api/payment',
       },
     })
     redirect(preference.sandbox_init_point!)

@@ -1,39 +1,54 @@
 import { dbConnect } from '@/lib/mongodb'
 import { MercadoPagoConfig, Payment } from 'mercadopago'
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import bookingPaymentModel from '@/models/bookingPayment'
 // Agrega credenciales
+const accessToken = process.env.YOUR_ACCESS_TOKEN
 const client = new MercadoPagoConfig({
-  accessToken: process.env.YOUR_ACCESS_TOKEN!,
+  accessToken: accessToken!,
 })
 export async function POST(request: NextRequest) {
   try {
-    dbConnect()
+    // Conectar a la base de datos
+    await dbConnect()
+
     const body = await request
       .json()
       .then((data) => data as { data: { id: string } })
-    // sguridad en prod
+
+    // Validar seguridad en producción
     const secret = request.headers.get('x-signature-id')
     if (secret !== process.env.SECRET_KEY_MP) {
-      return Response.json({ succes: false })
+      return Response.json({ success: false }, { status: 401 })
     }
 
+    // Obtener información del pago
     const payment = await new Payment(client).get({ id: body.data.id })
+
+    // Crear objeto para almacenar en la base de datos
     const bookingPayment = {
       id: payment.id,
       amount: payment.transaction_amount,
       message: payment.description,
     }
+
     console.log({ payment })
 
-    //aqui estoy mandando la ruesta d ela api de mercado , donde ya se realizo el pago
+    // Verificar si ya existe en la base de datos antes de duplicar
+    const existingPayment = await bookingPaymentModel.findOne({
+      id: bookingPayment.id,
+    })
+    if (!existingPayment) {
+      // Guardar en la base de datos
+      await bookingPaymentModel.create(bookingPayment)
+    } else {
+      console.log('El pago ya existe en la base de datos.')
+    }
 
-    //TODO: asegurarse de que no exista en la db antes de enviarlo para no duplicar
-    await bookingPaymentModel.create(bookingPayment)
-    //hay que devolver un 200 para que no se duplique
+    // Devolver una respuesta exitosa
     return Response.json({ success: true }, { status: 200 })
   } catch (error: any) {
-    console.log(error)
+    console.error(error)
     return new Response(`Webhook error: ${error.message}`, {
       status: 400,
     })

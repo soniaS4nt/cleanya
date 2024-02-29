@@ -44,6 +44,8 @@ export async function POST(request: NextRequest) {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
+        'X-Idempotency-Key': '0d5020ed-1af6-469c-ae06-c3bec19954bb',
+        Authorization: `${process.env.YOUR_ACCESS_TOKEN}`,
       },
     })
   } catch (error: any) {

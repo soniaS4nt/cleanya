@@ -21,8 +21,9 @@ export default async function PagoForm() {
             unit_price: Number(formData.get('total')),
           },
         ],
+        auto_return: 'approved',
         back_urls: {
-          success: 'https://cleanya-git-dev-sonias4nt.vercel.app/',
+          success: 'https://cleanya-git-dev-sonias4nt.vercel.app/api/payment',
         },
       },
     })

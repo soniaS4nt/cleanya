@@ -16,6 +16,8 @@ export async function POST(request: NextRequest) {
       .json()
       .then((data) => data as { data: { id: string } })
 
+    // Configurar los headers
+
     // Obtener información del pago
     const payment = await new Payment(client).get({ id: body.data.id })
 
@@ -25,8 +27,6 @@ export async function POST(request: NextRequest) {
       amount: payment.transaction_amount,
       message: payment.description,
     }
-
-    console.log({ payment })
 
     // Verificar si ya existe en la base de datos antes de duplicar
     const existingPayment = await bookingPaymentModel.findOne({
@@ -40,7 +40,12 @@ export async function POST(request: NextRequest) {
     }
 
     // Devolver una respuesta exitosa
-    return Response.json({ success: true }, { status: 200 })
+    return NextResponse.next({
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
   } catch (error: any) {
     console.error(error)
     return new Response(`Webhook error: ${error.message}`, {

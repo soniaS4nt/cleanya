@@ -16,12 +16,6 @@ export async function POST(request: NextRequest) {
       .json()
       .then((data) => data as { data: { id: string } })
 
-    // Validar seguridad en producción
-    const secret = request.headers.get('x-signature-id')
-    if (secret !== process.env.SECRET_KEY_MP) {
-      return Response.json({ success: false }, { status: 401 })
-    }
-
     // Obtener información del pago
     const payment = await new Payment(client).get({ id: body.data.id })
 

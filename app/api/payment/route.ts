@@ -10,13 +10,11 @@ const client = new MercadoPagoConfig({
 export async function POST(request: NextRequest) {
   try {
     // Conectar a la base de datos
-    await dbConnect()
+    dbConnect()
 
     const body = await request
       .json()
       .then((data) => data as { data: { id: string } })
-
-    // Configurar los headers
 
     // Obtener información del pago
     const payment = await new Payment(client).get({ id: body.data.id })

@@ -30,7 +30,7 @@ export default async function PagoForm() {
         back_urls: {
           success: `${URL}`,
         },
-        notification_url: URL + '/api/payment',
+        notification_url: `${URL}/api/payment`,
       },
     })
     redirect(preference.sandbox_init_point!)

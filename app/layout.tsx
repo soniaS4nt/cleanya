@@ -34,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={joseFin.className}>
+      <body className={`${joseFin.className} antialiased`}>
         <TopNav />
         {children}
         <Toaster />

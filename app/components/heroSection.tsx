@@ -1,6 +1,12 @@
 import Image from 'next/image'
 import ButtonBooking from '@/components/buttonBooking'
-
+import { CardPhoto } from './cardPhoto'
+import QuestionFrequentComponent from './questionFrequent'
+const image = [
+  'https://www.65ymas.com/uploads/s1/36/16/74/bigstock-wife-housekeeping-and-cleaning-357648977.jpeg',
+  'https://www.65ymas.com/uploads/s1/36/16/74/bigstock-wife-housekeeping-and-cleaning-357648977.jpeg',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_Bzti2TxDgN-a0OMzpOM-N3hHKFu5cHrBQA&usqp=CAU',
+]
 export default function HeroSection() {
   return (
     <>
@@ -36,6 +42,11 @@ export default function HeroSection() {
 
       <div className="flex m-3 p-1 my-10 md:my-40">
         <Image src="/Illustration.svg" alt="" width={900} height={600} />
+      </div>
+      <div className="grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-2 bg-[url('/bgPhotos.png')] bg-no-repeat bg-cover w-screen sm:h-[900px] h-auto justify-center items-center py-16 px-4">
+        {image.map((img) => (
+          <CardPhoto src={img} key={''} />
+        ))}
       </div>
     </>
   )

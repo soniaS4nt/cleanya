@@ -37,6 +37,7 @@ export default function RootLayout({
         <TopNav />
         {children}
         <Toaster />
+        <FooterSection />
       </body>
     </html>
   )

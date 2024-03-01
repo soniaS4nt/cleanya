@@ -52,7 +52,7 @@ function Booking() {
     },
   ]
   return (
-    <div className="h-screen m-2">
+    <div className="block h-screen m-2 mb-10">
       <BookingProvider>
         <TabsHero tabs={tabs} className="mt-16" />
       </BookingProvider>

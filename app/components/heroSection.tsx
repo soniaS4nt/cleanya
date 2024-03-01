@@ -34,13 +34,9 @@ export default function HeroSection() {
         </p>
       </div>
 
-      <Image
-        className="flex m-3 p-1 md:mt-40"
-        src="/Illustration.svg"
-        alt=""
-        width={900}
-        height={600}
-      />
+      <div className="flex m-3 p-1 my-10 md:my-40">
+        <Image src="/Illustration.svg" alt="" width={900} height={600} />
+      </div>
     </>
   )
 }

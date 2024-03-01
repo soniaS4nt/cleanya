@@ -13,6 +13,7 @@
     "@headlessui/tailwindcss": "^0.2.0",
     "@remixicon/react": "^4.1.1",
     "@tremor/react": "^3.14.0",
+    "@vercel/speed-insights": "^1.0.10",
     "bcrypt": "^5.1.1",
     "dayjs": "^1.11.10",
     "mercadopago": "^2.0.8",

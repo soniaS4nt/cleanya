@@ -22,9 +22,6 @@ export default async function PagoForm() {
           },
         ],
         auto_return: 'approved',
-        back_urls: {
-          success: 'https://cleanya-git-dev-sonias4nt.vercel.app/api/payment',
-        },
       },
     })
     redirect(preference.sandbox_init_point!)

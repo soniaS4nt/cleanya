@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
       session.endSession()
 
       return NextResponse.json(
-        { message: 'Creando reserva', status: 1 },
+        { message: 'Reserva creada', status: 1 },
         { status: 201 }
       )
     }

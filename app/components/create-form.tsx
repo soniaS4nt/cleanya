@@ -25,24 +25,23 @@ export default function CreateForm({ className }: { className: string }) {
   const [data, setData] = useState<Props[]>([])
   const { bookingData, setBookingData } = useBookingContext()
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch(`/api/horasDisponibles`, {
-          cache: 'no-store',
-        })
+  const fetchData = async () => {
+    try {
+      const res = await fetch(`/api/horasDisponibles`, {
+        cache: 'no-store',
+      })
 
-        if (!res.ok) {
-          throw new Error('Failed to fetch data')
-        }
-
-        const data = await res.json()
-        setData(data.data)
-      } catch (error) {
-        console.error('Error fetching data:', error)
+      if (!res.ok) {
+        throw new Error('Failed to fetch data')
       }
-    }
 
+      const data = await res.json()
+      setData(data.data)
+    } catch (error) {
+      console.error('Error fetching data:', error)
+    }
+  }
+  useEffect(() => {
     fetchData()
   }, [options])
 
@@ -63,7 +62,7 @@ export default function CreateForm({ className }: { className: string }) {
 
       if (dateFilter) {
         const availableHours = dateFilter.hours
-          .filter((hour) => hour.available)
+          .filter((hour) => hour.available === true)
           .map((hour) => ({
             hours: hour.hours,
             available: hour.available,
@@ -73,17 +72,6 @@ export default function CreateForm({ className }: { className: string }) {
         setOptions([])
       }
     }
-  }
-
-  const clearBookingDataAndForm = () => {
-    // Limpiar los datos del contexto
-    setBookingData(initialState.bookingData)
-
-    // Restablecer los valores de los campos del formulario
-    const inputs = document.querySelectorAll('input')
-    inputs.forEach((input) => {
-      input.value = ''
-    })
   }
 
   const handleChangeHours = (value: string[]) => {
@@ -96,49 +84,8 @@ export default function CreateForm({ className }: { className: string }) {
     }))
   }
 
-  async function postAppoiment(body: any) {
-    try {
-      const res = await fetch(`/api/reservas`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-      })
-
-      if (!res.ok) {
-        toast.warning('Faltan campos por llenar', {
-          position: 'bottom-center',
-        })
-      }
-
-      // Si la solicitud fue exitosa, puedes manejar la respuesta si es necesario
-      const data = await res.json()
-      return data // Devuelve los datos de respuesta si es necesario
-    } catch (error) {
-      console.error('Error fetching data:', error)
-      throw error
-    }
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    const res = await postAppoiment(bookingData)
-    if (res.status === 1) {
-      toast.success('La reserva fue hecha exitosamente', {
-        position: 'top-center',
-      })
-      //se limpia el calendario y select o forms
-      clearBookingDataAndForm()
-    } else {
-      toast.error('No se pudo reservar', {
-        position: 'top-center',
-      })
-    }
-  }
-
   return (
-    <form onSubmit={handleSubmit} className={className}>
+    <form /* onSubmit={handleSubmit} */ className={className}>
       <div className="min-w-72 mb-10">
         <DatePickerHero
           onValueChange={handleChange}
@@ -152,11 +99,10 @@ export default function CreateForm({ className }: { className: string }) {
           options={options}
         />
       </div>
-      <button type="submit" className="bg-blue-500">
+      {/* <button type="submit" className="bg-blue-500">
         {' '}
         reservar
-      </button>
+      </button> */}
     </form>
   )
 }
-/* export const dynamic = 'force-dynamic' */

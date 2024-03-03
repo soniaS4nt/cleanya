@@ -1,8 +1,8 @@
 import { MultiSelect, MultiSelectItem } from '@tremor/react'
-import { useEffect } from 'react'
 
 export type Option = {
   hours: string
+  available?: boolean
 }
 
 type Props = {

@@ -19,9 +19,9 @@ export interface IAppointment {
     instrucciones: { id: number; value: string }
   }
   requirements: {
-    rooms: { id: number; value: string }
-    bathrooms: { id: number; value: string }
-    tipo: { id: number; value: string }
+    rooms: { id: number; value: string; price: number }
+    bathrooms: { id: number; value: string; price: number }
+    tipo: { id: number; value: string; price: number }
   }
 }
 
@@ -54,14 +54,17 @@ const AppointmentSchema = new Schema<IAppointment>(
       rooms: {
         id: { type: Number },
         value: { type: String },
+        price: { type: Number },
       },
       bathrooms: {
         id: { type: Number },
         value: { type: String },
+        price: { type: Number },
       },
       tipo: {
         id: { type: Number },
         value: { type: String },
+        price: { type: Number },
       },
     },
   },

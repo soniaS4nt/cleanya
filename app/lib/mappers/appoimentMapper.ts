@@ -24,14 +24,17 @@ export const appoimentMapper = (data: IAppointment) => ({
     bathrooms: {
       id: data.requirements.bathrooms.id,
       value: data.requirements.bathrooms.value,
+      price: data.requirements.bathrooms.price,
     },
     rooms: {
       id: data.requirements.rooms.id,
       value: data.requirements.rooms.value,
+      price: data.requirements.rooms.price,
     },
     tipo: {
       id: data.requirements.tipo.id,
       value: data.requirements.tipo.value,
+      price: data.requirements.tipo.price,
     },
   },
 })

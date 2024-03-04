@@ -1,6 +1,7 @@
 export type RectangleType = {
   id: number
   value: string
+  price: number
 }
 export interface RequerimientosI {
   rooms: RectangleType | null // Número de habitaciones

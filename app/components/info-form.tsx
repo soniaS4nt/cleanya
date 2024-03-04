@@ -1,5 +1,4 @@
 'use client'
-import React from 'react'
 import InfoComponent, { RectangleType } from './infoComponent'
 import { useBookingContext } from '@/contexts/bookingsContext'
 
@@ -20,28 +19,28 @@ export default function InfoForm({ className }: { className: string }) {
 
   const titleHabitaciones = 'N° de habitaciones'
   const rectanglesHabitaciones = [
-    { id: 1, value: 'Estudio' },
-    { id: 2, value: '1' },
-    { id: 3, value: '2' },
-    { id: 4, value: '3' },
-    { id: 5, value: '4' },
-    { id: 6, value: '5' },
+    { id: 1, value: 'Estudio', price: 0 },
+    { id: 2, value: '1', price: 0 },
+    { id: 3, value: '2', price: 0 },
+    { id: 4, value: '3', price: 1500 },
+    { id: 5, value: '4', price: 3000 },
+    { id: 6, value: '5', price: 6000 },
   ]
 
   const titleBaños = 'N° de Baños'
   const rectanglesBaños = [
-    { id: 7, value: '1' },
-    { id: 8, value: '2' },
-    { id: 9, value: '3' },
-    { id: 10, value: '4' },
+    { id: 7, value: '1', price: 0 },
+    { id: 8, value: '2', price: 1500 },
+    { id: 9, value: '3', price: 3000 },
+    { id: 10, value: '4', price: 6000 },
   ]
 
   const titleTipo = 'Tipo de limpieza'
   const rectanglesTipo = [
-    { id: 11, value: 'standard' },
-    { id: 12, value: 'deep clean' },
-    { id: 13, value: 'Mudanza' },
-    { id: 14, value: 'Post Cosntrucción' },
+    { id: 11, value: 'básica', price: 27000 },
+    { id: 12, value: 'limpieza profunda', price: 40000 },
+    { id: 13, value: 'Mudanza', price: 60000 },
+    { id: 14, value: 'Post Cosntrucción', price: 70000 },
   ]
 
   return (

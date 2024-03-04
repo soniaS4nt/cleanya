@@ -3,19 +3,26 @@ import InfoComponent, { RectangleType } from './infoComponent'
 import { useBookingContext } from '@/contexts/bookingsContext'
 
 export default function InfoForm({ className }: { className: string }) {
-  const { bookingData, setBookingData } = useBookingContext()
+  const { bookingData, dispatch } = useBookingContext()
 
   const handleSelection = (data: RectangleType | null, field: string) => {
+    // Envía una acción para actualizar el estado de la reserva con los nuevos datos de requisitos
     if (data !== undefined) {
-      setBookingData((prevData) => ({
-        ...prevData,
-        requirements: {
-          ...prevData.requirements,
-          [field]: data,
+      dispatch({
+        type: 'CREATE_BOOKING_DATA',
+        payload: {
+          requirements: {
+            ...bookingData.requirements,
+            [field]: data,
+          },
         },
-      }))
+      })
+      dispatch({
+        type: 'CALCULATE_TOTAL_PAYMENT',
+      })
     }
   }
+  console.log({ reducer: bookingData })
 
   const titleHabitaciones = 'N° de habitaciones'
   const rectanglesHabitaciones = [

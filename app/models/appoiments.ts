@@ -6,7 +6,7 @@ export interface IAppointment {
     fecha: Date
     hora: string[]
   }
-  pago: string
+  pago: number
   detalles: {
     frecuencia: { id: number; value: string }
     direccion: {
@@ -32,7 +32,7 @@ const AppointmentSchema = new Schema<IAppointment>(
       fecha: { type: Date },
       hora: [{ type: String }],
     },
-    pago: { type: String },
+    pago: { type: Number },
     detalles: {
       frecuencia: {
         id: { type: Number },

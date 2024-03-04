@@ -8,7 +8,7 @@ import {
   TabPanel,
   TabPanels,
 } from '@tremor/react'
-import { initialState, useBookingContext } from '@/contexts/bookingsContext'
+import { useBookingContext } from '@/contexts/bookingsContext'
 import { toast } from 'sonner'
 
 interface TabData {
@@ -26,7 +26,7 @@ const TabsHero: React.FC<TabsHeroProps> = ({ tabs, className }) => {
   const handleChangeTab = (newIndex: number) => {
     setActiveTab(newIndex)
   }
-  const { bookingData, setBookingData } = useBookingContext()
+  const { bookingData, dispatch } = useBookingContext()
   async function postAppoiment(body: any) {
     try {
       const res = await fetch(`/api/reservas`, {
@@ -53,7 +53,7 @@ const TabsHero: React.FC<TabsHeroProps> = ({ tabs, className }) => {
   }
   const clearBookingDataAndForm = () => {
     // Limpiar los datos del contexto
-    setBookingData(initialState.bookingData)
+    dispatch({ type: 'CLEAN_BOOKING_DATA' })
 
     // Restablecer los valores de los campos del formulario
     const inputs = document.querySelectorAll('input')

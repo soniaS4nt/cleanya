@@ -2,7 +2,7 @@ import { IAppointment } from '@/models/appoiments'
 
 export const appoimentMapper = (data: IAppointment) => ({
   fechaHora: { fecha: data.fechaHora.fecha, hora: data.fechaHora.hora },
-  pago: 'esto es ficticio',
+  pago: data.pago,
   detalles: {
     direccion: {
       adicionales: data.detalles.direccion.adicionales,

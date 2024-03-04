@@ -1,69 +1,64 @@
 'use client'
-import { ReservationData } from '@/components/create-form'
-import { DetailI } from '@/components/details-form'
-import { RequerimientosI } from '@/components/infoComponent'
+
+import { Action, BookingData, reducer } from '@/reducers/dataBooking'
 import React, {
   PropsWithChildren,
   createContext,
   useContext,
-  useState,
+  useReducer,
 } from 'react'
 
-// Define el tipo para los datos recopilados en las pestañas
-export type BookingData = {
-  requirements: RequerimientosI
-  detalles: DetailI
-  fechaHora: ReservationData
-  pago: string | null
-}
-
+// Define el tipo para el estado inicial
 export interface InitialState {
   bookingData: BookingData
-  setBookingData: React.Dispatch<React.SetStateAction<BookingData>>
+  dispatch: React.Dispatch<Action>
 }
 
-export const initialState: InitialState = {
-  bookingData: {
-    requirements: {
-      rooms: null,
-      bathrooms: null,
-      tipo: null,
-    },
-    fechaHora: {
-      fecha: null,
-      hora: [],
-    },
-    pago: '',
-    detalles: {
-      frecuencia: null,
-      direccion: {
-        region: '',
-        comuna: '',
-        calle: '',
-        numero: '',
-        adicionales: '',
-      },
-      instrucciones: null,
-    },
+// Define el estado inicial
+export const initialState: BookingData = {
+  requirements: {
+    rooms: null,
+    bathrooms: null,
+    tipo: null,
   },
-  setBookingData: () => {},
+  fechaHora: {
+    fecha: null,
+    hora: [],
+  },
+  pago: 0,
+  detalles: {
+    frecuencia: null,
+    direccion: {
+      region: '',
+      comuna: '',
+      calle: '',
+      numero: '',
+      adicionales: '',
+    },
+    instrucciones: null,
+  },
 }
-// Crea el contexto para la información de reserva
-const BookingContext = createContext<InitialState>(initialState)
+
+// Define el contexto para la información de reserva
+const BookingContext = createContext<InitialState | undefined>(undefined)
 
 // Hook personalizado para acceder al contexto de la información de reserva
-export const useBookingContext = () => useContext(BookingContext)
+export const useBookingContext = () => {
+  const context = useContext(BookingContext)
+  if (!context) {
+    throw new Error('useBookingContext must be used within a BookingProvider')
+  }
+  return context
+}
 
 // Componente proveedor que envuelve la aplicación y proporciona el contexto de la información de reserva
 export const BookingProvider: React.FC<PropsWithChildren<{}>> = ({
   children,
 }) => {
-  const [bookingData, setBookingData] = useState<BookingData>(
-    initialState.bookingData
-  )
+  const [bookingData, dispatch] = useReducer(reducer, initialState)
 
   return (
-    <BookingContext.Provider value={{ bookingData, setBookingData }}>
+    <BookingContext.Provider value={{ bookingData, dispatch }}>
       {children}
     </BookingContext.Provider>
   )

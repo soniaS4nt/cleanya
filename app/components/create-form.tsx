@@ -4,8 +4,7 @@ import { DatePickerHero } from './calendars'
 import MultiSelectComponent, { Option } from './multiSelect'
 import dayjs from 'dayjs'
 import { DatePickerValue } from '@tremor/react'
-import { toast } from 'sonner'
-import { initialState, useBookingContext } from '@/contexts/bookingsContext'
+import { useBookingContext } from '@/contexts/bookingsContext'
 
 export interface ReservationData {
   fecha: DatePickerValue | null
@@ -23,7 +22,7 @@ interface Props {
 export default function CreateForm({ className }: { className: string }) {
   const [options, setOptions] = useState<Option[]>([]) // Inicializar date como un array de cadenas
   const [data, setData] = useState<Props[]>([])
-  const { bookingData, setBookingData } = useBookingContext()
+  const { bookingData, dispatch } = useBookingContext()
 
   const fetchData = async () => {
     try {
@@ -65,15 +64,15 @@ export default function CreateForm({ className }: { className: string }) {
   const handleChange = (value: DatePickerValue) => {
     bookingData.fechaHora.hora = []
     const newValue = dayjs(value).format('D/M/YYYY')
-
-    setBookingData((prevData) => ({
-      ...prevData,
-      fechaHora: {
-        ...prevData.fechaHora,
-        fecha: value,
+    dispatch({
+      type: 'CREATE_BOOKING_DATA',
+      payload: {
+        fechaHora: {
+          ...bookingData.fechaHora,
+          fecha: value,
+        },
       },
-    }))
-
+    })
     if (value) {
       const dateFilter = data?.find((bookings) => bookings.date === newValue)
 
@@ -92,17 +91,19 @@ export default function CreateForm({ className }: { className: string }) {
   }
 
   const handleChangeHours = (value: string[]) => {
-    setBookingData((prevData) => ({
-      ...prevData,
-      fechaHora: {
-        ...prevData.fechaHora,
-        hora: value,
+    dispatch({
+      type: 'CREATE_BOOKING_DATA',
+      payload: {
+        fechaHora: {
+          ...bookingData.fechaHora,
+          hora: value,
+        },
       },
-    }))
+    })
   }
 
   return (
-    <form /* onSubmit={handleSubmit} */ className={className}>
+    <form className={className}>
       <div className="min-w-72 mb-10">
         <DatePickerHero
           onValueChange={handleChange}
@@ -116,10 +117,6 @@ export default function CreateForm({ className }: { className: string }) {
           options={options}
         />
       </div>
-      {/* <button type="submit" className="bg-blue-500">
-        {' '}
-        reservar
-      </button> */}
     </form>
   )
 }

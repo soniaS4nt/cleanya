@@ -36,14 +36,31 @@ export default function CreateForm({ className }: { className: string }) {
       }
 
       const data = await res.json()
-      setData(data.data)
+
+      return setData(data.data)
     } catch (error) {
       console.error('Error fetching data:', error)
     }
   }
   useEffect(() => {
-    fetchData()
-  }, [options])
+    let ignore = false
+
+    // Función para realizar la solicitud de datos
+    const fetchDataAndSetData = async () => {
+      // Se verifica si la solicitud de datos debe ser ignorada
+      if (!ignore) {
+        await fetchData()
+      }
+    }
+
+    // Se llama a la función para realizar la solicitud de datos
+    fetchDataAndSetData()
+
+    // Función de limpieza para controlar el momento en que se desmonta el componente
+    return () => {
+      ignore = true
+    }
+  }, [bookingData.fechaHora.hora])
 
   const handleChange = (value: DatePickerValue) => {
     bookingData.fechaHora.hora = []

@@ -10,7 +10,9 @@ export async function GET(request: NextRequest) {
 
     if (session) {
       // Do something with the session
-      const hoursAvailable = await hoursavailable.find()
+      const hoursAvailable = await hoursavailable.find({
+        'hours.available': true,
+      })
 
       return NextResponse.json({ data: hoursAvailable }, { status: 200 })
     }

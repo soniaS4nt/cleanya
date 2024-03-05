@@ -24,7 +24,6 @@ export async function POST(request: NextRequest) {
       amount: payment.transaction_amount,
       message: payment.description,
     }
-    console.log({ payment })
 
     //aqui estoy mandando la ruesta d ela api de mercado , donde ya se realizo el pago
 

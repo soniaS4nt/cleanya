@@ -1,0 +1,38 @@
+import { TextInput } from '@tremor/react'
+
+export default function PersonalInfo({ dispatch, bookingData }: any) {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    let value = event.target.value
+    let name = event.target.name
+    dispatch({
+      type: 'CREATE_BOOKING_DATA',
+      payload: {
+        client: {
+          ...bookingData.client,
+          [name]: value,
+        },
+      },
+    })
+  }
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+      <TextInput
+        type="text"
+        placeholder="Ingresa tu nombre y apellido"
+        maxLength={40}
+        name="fullName"
+        onChange={handleChange}
+      />
+      <TextInput
+        type="email"
+        placeholder="Ingresa tu correo"
+        maxLength={45}
+        name="email"
+        onChange={handleChange}
+      />
+    </div>
+  )
+}

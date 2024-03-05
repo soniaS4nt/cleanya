@@ -22,7 +22,6 @@ export default function InfoForm({ className }: { className: string }) {
       })
     }
   }
-  console.log({ reducer: bookingData })
 
   const titleHabitaciones = 'N° de habitaciones'
   const rectanglesHabitaciones = [

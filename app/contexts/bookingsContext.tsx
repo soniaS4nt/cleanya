@@ -37,6 +37,11 @@ export const initialState: BookingData = {
     },
     instrucciones: null,
   },
+  client: {
+    fullName: '',
+    email: '',
+    appointments: [],
+  },
 }
 
 // Define el contexto para la información de reserva

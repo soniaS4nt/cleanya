@@ -64,7 +64,6 @@ const TabsHero: React.FC<TabsHeroProps> = ({ tabs, className }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     const res = await postAppoiment(bookingData)
-    console.log(res)
 
     if (res.status === 1) {
       toast.promise(Promise.resolve(res), {

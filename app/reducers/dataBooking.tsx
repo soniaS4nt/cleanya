@@ -2,12 +2,14 @@ import { initialState } from '@/contexts/bookingsContext'
 import { ReservationData } from '@/components/create-form'
 import { DetailI } from '@/components/details-form'
 import { RequerimientosI } from '@/components/infoComponent'
+import { IClient } from '@/models/clients'
 
 export type BookingData = {
   requirements: RequerimientosI
   detalles: DetailI
   fechaHora: ReservationData
   pago: number | null
+  client: IClient
 }
 
 // Define el tipo para la acción del reducer

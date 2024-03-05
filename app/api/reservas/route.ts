@@ -6,6 +6,8 @@ import dayjs from 'dayjs'
 import mongoose from 'mongoose'
 import { dbConnect } from '@/lib/mongodb'
 import { auth } from '../../../auth'
+import clients from '@/models/clients'
+import { clientMapper } from '@/lib/mappers/clientMapper'
 
 export async function POST(request: NextRequest) {
   dbConnect()
@@ -25,8 +27,32 @@ export async function POST(request: NextRequest) {
           session,
         }
       )
+      //busco si existe mi cleinte
+      const existingClient = await clients
+        .findOne({
+          /*  fullName: data.client.fullName, */
+          email: data.client.email,
+        })
+        .session(session)
 
-      // 2. Actualizar la disponibilidad de horas
+      if (existingClient) {
+        // Si el cliente existe, actualiza su appoimentId con el nuevo ID de la cita
+        await clients
+          .findOneAndUpdate(
+            { _id: existingClient._id }, // Filtra por el ID del cliente existente
+            { $push: { appointments: [createdAppointment[0]._id] } }, // Establece el nuevo ID de la cita en el campo appoimentId
+            { new: true, session } //grega el nuevo ID de la cita al array appoimentId
+          )
+          .session(session)
+      } else {
+        //2. Crear un cliente con el appoimentid
+        const createClient = await clients.create(
+          [clientMapper(data, createdAppointment[0].id)],
+          { session }
+        )
+      }
+
+      // 3. Actualizar la disponibilidad de horas
       const dataDate = data.fechaHora.fecha // Debes asegurarte de formatear adecuadamente la fecha aquí
       const dataDateFormatted = dayjs(dataDate).format('D/M/YYYY')
       const dataHours = data.fechaHora.hora

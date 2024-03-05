@@ -2,6 +2,7 @@ import CreateForm from '@/components/create-form'
 import DetailsForm from '@/components/details-form'
 import InfoForm from '@/components/info-form'
 import PagoForm from '@/components/pago-form'
+import ReservationSummary from '@/components/resume-form'
 import TabsHero from '@/components/tabs'
 import { Metadata } from 'next'
 
@@ -36,6 +37,14 @@ const tabs = [
     content: (
       <div>
         <DetailsForm className="" />
+      </div>
+    ),
+  },
+  {
+    title: 'Resumen',
+    content: (
+      <div>
+        <ReservationSummary />
       </div>
     ),
   },

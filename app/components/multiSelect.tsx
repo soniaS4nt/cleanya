@@ -27,6 +27,7 @@ export default function MultiSelectComponent({
       value={value}
       name="multiSelect"
       key="multi"
+      placeholder="Seleccionar hora"
     >
       {options && options.length > 0 ? (
         options.map((hours, index) => (

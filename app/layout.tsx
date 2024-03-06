@@ -38,7 +38,7 @@ export default function RootLayout({
       <body className={`${joseFin.className} antialiased`}>
         <TopNav />
         <BookingProvider>{children}</BookingProvider>
-        <Toaster richColors />
+        <Toaster richColors expand />
         <FooterSection />
         <SpeedInsights />
       </body>

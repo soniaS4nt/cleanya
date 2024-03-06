@@ -21,14 +21,14 @@ export default function PersonalInfo({ dispatch, bookingData }: any) {
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
       <TextInput
         type="text"
-        placeholder="Ingresa tu nombre y apellido"
+        placeholder="Juan Perez"
         maxLength={40}
         name="fullName"
         onChange={handleChange}
       />
       <TextInput
         type="email"
-        placeholder="Ingresa tu correo"
+        placeholder="juanperez@example.com"
         maxLength={45}
         name="email"
         onChange={handleChange}

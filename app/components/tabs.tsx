@@ -10,6 +10,7 @@ import {
 } from '@tremor/react'
 import { useBookingContext } from '@/contexts/bookingsContext'
 import { toast } from 'sonner'
+import { postAppoiment, senEmail } from '@/lib/data'
 
 interface TabData {
   title: string
@@ -27,30 +28,7 @@ const TabsHero: React.FC<TabsHeroProps> = ({ tabs, className }) => {
     setActiveTab(newIndex)
   }
   const { bookingData, dispatch } = useBookingContext()
-  async function postAppoiment(body: any) {
-    try {
-      const res = await fetch(`/api/reservas`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-      })
 
-      if (!res.ok) {
-        toast.warning('Faltan campos por llenar', {
-          position: 'bottom-center',
-        })
-      }
-
-      // Si la solicitud fue exitosa, puedes manejar la respuesta si es necesario
-      const data = await res.json()
-      return data // Devuelve los datos de respuesta si es necesario
-    } catch (error) {
-      console.error('Error fetching data:', error)
-      throw error
-    }
-  }
   const clearBookingDataAndForm = () => {
     // Limpiar los datos del contexto
     dispatch({ type: 'CLEAN_BOOKING_DATA' })
@@ -64,8 +42,10 @@ const TabsHero: React.FC<TabsHeroProps> = ({ tabs, className }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     const res = await postAppoiment(bookingData)
+    //aqui mandamos el email
 
     if (res.status === 1) {
+      await senEmail(bookingData)
       toast.promise(Promise.resolve(res), {
         loading: 'Cargando...',
         success: (res) => {
@@ -74,10 +54,6 @@ const TabsHero: React.FC<TabsHeroProps> = ({ tabs, className }) => {
         position: 'top-center',
         error: 'Error',
       })
-      clearBookingDataAndForm()
-      /*   toast.success('La reserva fue hecha exitosamente', {
-        position: 'top-center',
-      }) */
       //se limpia el calendario y select o forms
       clearBookingDataAndForm()
     } else {

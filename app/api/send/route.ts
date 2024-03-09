@@ -29,14 +29,8 @@ const mail = (data: BookingData) => ({
 export async function POST(request: NextRequest) {
   const data: BookingData = await request.json()
   try {
-    transporter.sendMail(mail(data), (error, info) => {
-      if (error) {
-        console.error('Error sending email: ', error)
-      } //end if
-      else {
-        console.log('Email sent.')
-      } //end else
-    })
+    await transporter.sendMail(mail(data))
+
     return Response.json({ message: 'Correo enviado' })
   } catch (error) {
     return Response.json({ error }, { status: 500 })

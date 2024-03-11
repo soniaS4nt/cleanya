@@ -172,6 +172,10 @@ export const generateHtml = (data: BookingData) => {
                                                         <p style="border: 2px solid #12a4d9; border-radius: 0.5rem; padding: 0.5rem;">
                                                             Pago Total: ${formattedPago}
                                                         </p>
+                                                        <a href='${
+                                                          process.env
+                                                            .NEXT_PUBLIC_BASE_API_URL
+                                                        }/confirmar-reserva'>Confirmar </a>
                                                   </td>
                                               </tr>
                                           </table>

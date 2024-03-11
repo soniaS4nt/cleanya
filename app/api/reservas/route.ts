@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from 'next/server'
-import appointment, { IAppointment } from '@/models/appoiments'
+import appointment from '@/models/appoiments'
 import { appoimentMapper } from '@/lib/mappers/appoimentMapper'
 import hoursavailable from '@/models/hoursAvailable'
 import dayjs from 'dayjs'
@@ -8,6 +8,7 @@ import { dbConnect } from '@/lib/mongodb'
 import { auth } from '../../../auth'
 import clients from '@/models/clients'
 import { clientMapper } from '@/lib/mappers/clientMapper'
+import { ZodError } from 'zod'
 
 export async function POST(request: NextRequest) {
   dbConnect()
@@ -83,10 +84,12 @@ export async function POST(request: NextRequest) {
     await session.abortTransaction()
     session.endSession()
 
-    console.error(error)
-    return NextResponse.json(
-      { error: 'Internal Server Error' },
-      { status: 500 }
-    )
+    if (error instanceof ZodError) {
+      return NextResponse.json({ errors: error.errors }, { status: 400 })
+    } else {
+      // Maneja cualquier otro tipo de error
+      console.error(error)
+      return NextResponse.json({ error: 'Internal Server Error' })
+    }
   }
 }

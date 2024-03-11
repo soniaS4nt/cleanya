@@ -20,6 +20,22 @@ export async function getData() {
 
 export async function postAppoiment(body: any) {
   try {
+    /*    const data = await res.json()
+      if (!res.ok) {
+        const errorData = await data // Lee el cuerpo de la respuesta para obtener los errores
+        const errorMessage = errorData.errors[0].message || 'Error desconocido' //
+        toast.warning(errorMessage, {
+          position: 'top-center',
+        })
+      }
+
+      // Si la solicitud fue exitosa, puedes manejar la respuesta si es necesario
+      return data // Devuelve los datos de respuesta si es necesario
+    } catch (error) {
+      console.error('Error fetching data:', error)
+      throw error
+    }
+  } */
     const res = await fetch(`/api/reservas`, {
       method: 'POST',
       headers: {
@@ -27,16 +43,17 @@ export async function postAppoiment(body: any) {
       },
       body: JSON.stringify(body),
     })
-
+    const data = await res.json()
     if (!res.ok) {
-      toast.warning('Faltan campos por llenar', {
-        position: 'bottom-center',
+      const errorData = await data // Lee el cuerpo de la respuesta para obtener los errores
+      const errorMessage = errorData.errors[0].message || 'Error desconocido' //
+      toast.warning(errorMessage, {
+        position: 'top-center',
       })
     }
 
     // Si la solicitud fue exitosa, puedes manejar la respuesta si es necesario
-    const data = await res.json()
-    return data // Devuelve los datos de respuesta si es necesario
+    return data
   } catch (error) {
     console.error('Error fetching data:', error)
     throw error

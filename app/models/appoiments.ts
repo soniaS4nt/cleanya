@@ -29,41 +29,41 @@ export interface IAppointment {
 const AppointmentSchema = new Schema<IAppointment>(
   {
     fechaHora: {
-      fecha: { type: Date },
-      hora: [{ type: String }],
+      fecha: { type: Date, required: true },
+      hora: [{ type: String, required: true }],
     },
     pago: { type: Number },
     detalles: {
       frecuencia: {
         id: { type: Number },
-        value: { type: String },
+        value: { type: String, required: true },
       },
       direccion: {
-        region: { type: String },
-        comuna: { type: String },
-        calle: { type: String },
-        numero: { type: String },
+        region: { type: String, required: true },
+        comuna: { type: String, required: true },
+        calle: { type: String, required: true },
+        numero: { type: String, required: true },
         adicionales: { type: String },
       },
       instrucciones: {
         id: { type: Number },
-        value: { type: String },
+        value: { type: String, required: true },
       },
     },
     requirements: {
       rooms: {
         id: { type: Number },
-        value: { type: String },
+        value: { type: String, required: true },
         price: { type: Number },
       },
       bathrooms: {
         id: { type: Number },
-        value: { type: String },
+        value: { type: String, required: true },
         price: { type: Number },
       },
       tipo: {
         id: { type: Number },
-        value: { type: String },
+        value: { type: String, required: true },
         price: { type: Number },
       },
     },

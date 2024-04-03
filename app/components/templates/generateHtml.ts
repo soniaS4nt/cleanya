@@ -1,12 +1,9 @@
 import dayjs from 'dayjs'
 import { BookingData } from '@/reducers/dataBooking'
-
-export const generateHtml = (data: BookingData) => {
+import { formattedPago } from '@/lib/utils'
+export const generateHtml = (data: BookingData, id: string) => {
   const { client, detalles, fechaHora, pago, requirements } = data
-  const formattedPago = pago?.toLocaleString('es-CL', {
-    style: 'currency',
-    currency: 'CLP',
-  })
+
   return `
   <!DOCTYPE html>
   <html>
@@ -170,12 +167,14 @@ export const generateHtml = (data: BookingData) => {
                                                         }</p>
                                                         </div>
                                                         <p style="border: 2px solid #12a4d9; border-radius: 0.5rem; padding: 0.5rem;">
-                                                            Pago Total: ${formattedPago}
+                                                            Pago Total: ${formattedPago(
+                                                              pago
+                                                            )}
                                                         </p>
                                                         <a href='${
                                                           process.env
                                                             .NEXT_PUBLIC_BASE_API_URL
-                                                        }/confirmar-reserva'>Confirmar </a>
+                                                        }/confirmar-reserva/${id}'>Confirmar </a>
                                                   </td>
                                               </tr>
                                           </table>

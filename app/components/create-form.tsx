@@ -5,23 +5,11 @@ import MultiSelectComponent, { Option } from './multiSelect'
 import dayjs from 'dayjs'
 import { DatePickerValue } from '@tremor/react'
 import { useBookingContext } from '@/contexts/bookingsContext'
-
-export interface ReservationData {
-  fecha: DatePickerValue | null
-  hora: string[]
-}
-
-interface Props {
-  date: string
-  hours: {
-    hours: string
-    available?: boolean
-  }[]
-}
+import { HoursDocument } from '@/lib/definitions'
 
 export default function CreateForm({ className }: { className: string }) {
   const [options, setOptions] = useState<Option[]>([]) // Inicializar date como un array de cadenas
-  const [data, setData] = useState<Props[]>([])
+  const [data, setData] = useState<HoursDocument[]>([])
   const { bookingData, dispatch } = useBookingContext()
 
   const fetchData = async () => {

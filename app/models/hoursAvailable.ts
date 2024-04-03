@@ -1,16 +1,5 @@
 import { Schema, Document, model, models } from 'mongoose'
-
-// Define la interfaz para la estructura de cada hora
-interface Hour {
-  hours: string
-  available: boolean
-}
-
-// Define la interfaz para el documento de horas
-interface HoursDocument {
-  date: string
-  hours: Hour[] // Array de objetos de tipo Hour
-}
+import { HoursDocument } from '@/lib/definitions'
 
 // Define el esquema de Mongoose para las horas disponibles
 const hoursSchemaAvailable = new Schema<HoursDocument>({

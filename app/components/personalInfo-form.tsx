@@ -1,6 +1,11 @@
+import { Action, BookingData } from '@/lib/definitions'
 import { TextInput } from '@tremor/react'
-
-export default function PersonalInfo({ dispatch, bookingData }: any) {
+import React from 'react'
+export interface Props {
+  dispatch: React.Dispatch<Action>
+  bookingData: BookingData
+}
+export default function PersonalInfo({ dispatch, bookingData }: Props) {
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {

@@ -1,3 +1,23 @@
+import { connect, connection } from 'mongoose'
+
+const conn = {
+  isConnected: false,
+}
+
+export async function dbConnect() {
+  if (conn.isConnected) {
+    return
+  }
+
+  const db = await connect(
+    process.env.MONGODB_URI || 'mongodb://localhost:27017/test'
+  )
+  conn.isConnected = true // Establecer el estado de conexión como verdadero
+}
+
+connection?.on('connected', () => console.log('Mongodb connected to db'))
+
+connection?.on('error', (err) => console.error('Mongodb Errro:', err.message))
 /* import { MongoClient } from 'mongodb'
 
 if (!process.env.MONGODB_URI) {
@@ -32,24 +52,3 @@ if (process.env.NODE_ENV === 'development') {
 // separate module, the client can be shared across functions.
 export default clientPromise
  */
-
-import { connect, connection } from 'mongoose'
-
-const conn = {
-  isConnected: false,
-}
-
-export async function dbConnect() {
-  if (conn.isConnected) {
-    return
-  }
-
-  const db = await connect(
-    process.env.MONGODB_URI || 'mongodb://localhost:27017/test'
-  )
-  conn.isConnected = true // Establecer el estado de conexión como verdadero
-}
-
-connection.on('connected', () => console.log('Mongodb connected to db'))
-
-connection.on('error', (err) => console.error('Mongodb Errro:', err.message))

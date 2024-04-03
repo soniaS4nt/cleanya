@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import InfoComponent, { RectangleType } from './infoComponent'
+import InfoComponent from './infoComponent'
 import { useBookingContext } from '@/contexts/bookingsContext'
 import {
   SearchSelect,
@@ -8,19 +8,8 @@ import {
   TextInput,
   Textarea,
 } from '@tremor/react'
+import { RectangleType } from '@/lib/definitions'
 
-export type Direccion = {
-  region: string
-  comuna: string
-  calle: string
-  numero: string
-  adicionales: string
-}
-export interface DetailI {
-  frecuencia: RectangleType | null
-  direccion: Direccion
-  instrucciones: RectangleType | null
-}
 export default function DetailsForm({ className }: { className: string }) {
   const { bookingData, dispatch } = useBookingContext()
 

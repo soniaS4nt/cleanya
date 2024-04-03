@@ -45,7 +45,7 @@ const TabsHero: React.FC<TabsHeroProps> = ({ tabs, className }) => {
     //aqui mandamos el email
 
     if (res.status === 1) {
-      await senEmail(bookingData)
+      await senEmail(bookingData, res)
       toast.promise(Promise.resolve(res), {
         loading: 'Cargando...',
         success: (res) => {

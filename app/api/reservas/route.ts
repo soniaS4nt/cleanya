@@ -9,6 +9,7 @@ import { auth } from '../../../auth'
 import clients from '@/models/clients'
 import { clientMapper } from '@/lib/mappers/clientMapper'
 import { ZodError } from 'zod'
+import AppointmentState from '@/models/appointmentState'
 
 export async function POST(request: NextRequest) {
   dbConnect()
@@ -24,6 +25,23 @@ export async function POST(request: NextRequest) {
       // 1. Crear un nuevo appointment
       const createdAppointment = await appointment.create(
         [appoimentMapper(data)],
+        {
+          session,
+        }
+      )
+      // primero busco si existe por appoimentId- ** en realidad siempre va a cambiar , tendré que buscar por el id del AppointmentState
+
+      // si existe le cambio el estado pero solo si no es completed?
+
+      // si no existe o es completed creo un nuevo estado
+      const appointmentState = await AppointmentState.create(
+        [
+          {
+            appointmentId: createdAppointment[0]._id,
+            previousState: 'pending',
+            newState: 'pending', // Cambia este valor según sea necesario
+          },
+        ],
         {
           session,
         }
@@ -72,7 +90,11 @@ export async function POST(request: NextRequest) {
       session.endSession()
 
       return NextResponse.json(
-        { message: 'Reserva creada', status: 1 },
+        {
+          id: createdAppointment[0]._id.toString(),
+          message: 'Reserva creada',
+          status: 1,
+        },
         { status: 201 }
       )
     }

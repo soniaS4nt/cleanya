@@ -1,5 +1,11 @@
 import { toast } from 'sonner'
 import { API_URL } from './constants'
+import { dbConnect } from '@/lib/mongodb'
+import appoiments from '@/models/appoiments'
+import { unstable_noStore as noStore } from 'next/cache'
+import appointmentState from '@/models/appointmentState'
+import mongoose from 'mongoose'
+import { Booking, IAppointment } from './definitions'
 
 export async function getData() {
   try {
@@ -18,24 +24,8 @@ export async function getData() {
   }
 }
 
-export async function postAppoiment(body: any) {
+export async function postAppoiment(body: IAppointment) {
   try {
-    /*    const data = await res.json()
-      if (!res.ok) {
-        const errorData = await data // Lee el cuerpo de la respuesta para obtener los errores
-        const errorMessage = errorData.errors[0].message || 'Error desconocido' //
-        toast.warning(errorMessage, {
-          position: 'top-center',
-        })
-      }
-
-      // Si la solicitud fue exitosa, puedes manejar la respuesta si es necesario
-      return data // Devuelve los datos de respuesta si es necesario
-    } catch (error) {
-      console.error('Error fetching data:', error)
-      throw error
-    }
-  } */
     const res = await fetch(`/api/reservas`, {
       method: 'POST',
       headers: {
@@ -60,14 +50,14 @@ export async function postAppoiment(body: any) {
   }
 }
 
-export async function senEmail(body: any) {
+export async function senEmail(body: IAppointment, id: string) {
   try {
     const res = await fetch(`/api/send`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify({ body, id }),
     })
 
     if (!res.ok) {
@@ -82,5 +72,57 @@ export async function senEmail(body: any) {
   } catch (error) {
     console.error('Error fetching data:', error)
     throw error
+  }
+}
+
+export async function fetchBookings() {
+  noStore()
+  dbConnect()
+  try {
+    const response = await appoiments.find({})
+
+    const bookings: Booking[] = response.map((item) => ({
+      id: item._id.toString(),
+      estado: item.state || '',
+      fecha: item?.fechaHora?.fecha || '',
+      hora: item?.fechaHora?.hora || '',
+      pago: item?.pago || 0,
+      direccion: item?.detalles?.direccion || '',
+      frecuencia: item?.detalles?.frecuencia?.value || '',
+      instrucciones: item?.detalles?.instrucciones?.value || '',
+      habitaciones: item?.requirements?.rooms.value || '',
+      baños: item?.requirements?.bathrooms?.value || '',
+      tipo_limpieza: item?.requirements?.tipo?.value || '',
+      fecha_creacion: item?.createdAt || '',
+    }))
+    return bookings
+  } catch (error) {
+    console.error('Error fetching data:', error)
+    throw error
+  }
+}
+
+export async function updateStatusAppoiment(id: string, status: string) {
+  dbConnect()
+  const session = await mongoose.startSession()
+  session.startTransaction()
+  try {
+    //1-primero buscamos la reserva por el id y cambiamos el estado al nuevo
+    const appointment = await appoiments.findOneAndUpdate(
+      { _id: id },
+      { state: status }
+    )
+
+    //FIXME: 2- buscamos en state por el appimentId y ponemos el nuevo estado (aqui hay un tema con previousState)
+    const changeStateAppioiment = await appointmentState.findOneAndUpdate(
+      { appointmentId: id },
+      { newState: status }
+    )
+    return { message: 'success', status: 1 }
+  } catch (error) {
+    await session.abortTransaction()
+    session.endSession()
+    console.error('Error fetching data:', error)
+    return { message: `${error}`, status: 0 }
   }
 }

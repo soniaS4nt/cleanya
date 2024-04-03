@@ -5,11 +5,12 @@ import Credentials from 'next-auth/providers/credentials'
 import { z } from 'zod'
 import { authConfig } from './auth.config'
 import bcrypt from 'bcrypt'
+import { UserI } from '@/lib/definitions'
 
 async function getUser(email: string) {
   dbConnect()
   try {
-    const user: any = await users.findOne({
+    const user = await users.findOne({
       email: email,
     })
     return user

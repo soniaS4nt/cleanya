@@ -1,6 +1,7 @@
 'use client'
 
-import { Action, BookingData, reducer } from '@/reducers/dataBooking'
+import { Action, BookingData } from '@/lib/definitions'
+import { reducer } from '@/reducers/dataBooking'
 import React, {
   PropsWithChildren,
   createContext,

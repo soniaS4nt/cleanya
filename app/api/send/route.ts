@@ -19,17 +19,20 @@ const transporter = nodemailer.createTransport({
   },
 })
 
-const mail = (data: BookingData) => ({
+const mail = (data: BookingData, id: string) => ({
   from: 'cleanya.ayuda@gmail.com',
   to: data.client.email,
   subject: 'Limpieza reservada | cleanYA',
-  html: generateHtml(data),
+  html: generateHtml(data, id),
 })
-
+interface RequestData {
+  body: BookingData
+  id: { id: string }
+}
 export async function POST(request: NextRequest) {
-  const data: BookingData = await request.json()
+  const data: RequestData = await request.json()
   try {
-    await transporter.sendMail(mail(data))
+    await transporter.sendMail(mail(data.body, data?.id.id))
 
     return Response.json({ message: 'Correo enviado' })
   } catch (error) {

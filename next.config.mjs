@@ -26,11 +26,13 @@ const nextConfig = {
         },
       },
     })
+    config.resolve.fallback = {
+      'mongodb-client-encryption': false,
+      aws4: false,
+    }
+
     return config
 >>>>>>> 3b77d0240d815e5f157b67090acc0862df238e99
-  },
-  env: {
-    NEXT_PUBLIC_BASE_API_URL: 'http://localhost:3000',
   },
 }
 

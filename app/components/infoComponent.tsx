@@ -1,15 +1,4 @@
-export type RectangleType = {
-  id: number
-  value: string
-  price?: number
-}
-export interface RequerimientosI {
-  [key: string]: RectangleType | null
-  rooms: RectangleType | null // Número de habitaciones
-  bathrooms: RectangleType | null // Número de baños
-  tipo: RectangleType | null // Tipo de limpieza
-  // Puedes agregar más campos según sea necesario
-}
+import { RectangleType } from '@/lib/definitions'
 
 type Props = {
   title: string

@@ -1,5 +1,6 @@
 'use client'
-import InfoComponent, { RectangleType } from './infoComponent'
+import { RectangleType } from '@/lib/definitions'
+import InfoComponent from './infoComponent'
 import { useBookingContext } from '@/contexts/bookingsContext'
 
 export default function InfoForm({ className }: { className: string }) {

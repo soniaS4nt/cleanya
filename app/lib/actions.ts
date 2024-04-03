@@ -28,22 +28,3 @@ export async function authenticate(
     throw error
   }
 }
-
-/* export async function pagarA(formData: FormData) {
-  console.log(formData)
-
-  const preference = await new Preference(client).create({
-    body: {
-      items: [
-        {
-          id: 'servicio',
-          title: formData.get('title') as string,
-          quantity: 1,
-          unit_price: Number(formData.get('total')),
-        },
-      ],
-    },
-  })
-  redirect(preference.sandbox_init_point!)
-}
- */

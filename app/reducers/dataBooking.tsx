@@ -1,22 +1,5 @@
 import { initialState } from '@/contexts/bookingsContext'
-import { ReservationData } from '@/components/create-form'
-import { DetailI } from '@/components/details-form'
-import { RequerimientosI } from '@/components/infoComponent'
-import { IClient } from '@/models/clients'
-
-export type BookingData = {
-  requirements: RequerimientosI
-  detalles: DetailI
-  fechaHora: ReservationData
-  pago: number | null
-  client: IClient
-}
-
-// Define el tipo para la acción del reducer
-export type Action =
-  | { type: 'CREATE_BOOKING_DATA'; payload: Partial<BookingData> }
-  | { type: 'CLEAN_BOOKING_DATA' }
-  | { type: 'CALCULATE_TOTAL_PAYMENT' }
+import { Action, BookingData } from '@/lib/definitions'
 
 // Reducer para manejar las acciones sobre la información de reserva
 export const reducer = (state: BookingData, action: Action): BookingData => {

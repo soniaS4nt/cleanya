@@ -1,5 +1,8 @@
 'use client'
 import React, { useState } from 'react'
+import { useBookingContext } from '@/contexts/bookingsContext'
+import { toast } from 'sonner'
+import { postAppoiment, senEmail } from '@/lib/data'
 import {
   Card,
   Tab,
@@ -8,9 +11,6 @@ import {
   TabPanel,
   TabPanels,
 } from '@tremor/react'
-import { useBookingContext } from '@/contexts/bookingsContext'
-import { toast } from 'sonner'
-import { postAppoiment, senEmail } from '@/lib/data'
 
 interface TabData {
   title: string

@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+<<<<<<< HEAD
   async headers() {
     return [
       {
@@ -13,6 +14,20 @@ const nextConfig = {
         ],
       },
     ]
+=======
+  webpack: function (config) {
+    config.module.rules.push({
+      test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/,
+      use: {
+        loader: 'url-loader',
+        options: {
+          limit: 100000,
+          name: '[name].[ext]',
+        },
+      },
+    })
+    return config
+>>>>>>> 3b77d0240d815e5f157b67090acc0862df238e99
   },
   env: {
     NEXT_PUBLIC_BASE_API_URL: 'http://localhost:3000',

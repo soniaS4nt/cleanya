@@ -1,8 +1,8 @@
 import { MultiSelect, MultiSelectItem } from '@tremor/react'
-import { useEffect } from 'react'
 
 export type Option = {
   hours: string
+  available?: boolean
 }
 
 type Props = {
@@ -27,6 +27,7 @@ export default function MultiSelectComponent({
       value={value}
       name="multiSelect"
       key="multi"
+      placeholder="Seleccionar hora"
     >
       {options && options.length > 0 ? (
         options.map((hours, index) => (

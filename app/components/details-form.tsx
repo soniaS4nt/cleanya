@@ -22,17 +22,20 @@ export interface DetailI {
   instrucciones: RectangleType | null
 }
 export default function DetailsForm({ className }: { className: string }) {
-  const { bookingData, setBookingData } = useBookingContext()
+  const { bookingData, dispatch } = useBookingContext()
 
   const handleSelection = (data: RectangleType | string, field: string) => {
     if (data !== undefined) {
-      setBookingData((prevData) => ({
-        ...prevData,
-        detalles: {
-          ...prevData.detalles,
-          [field]: data,
+      // Envía una acción para actualizar los detalles en el estado de la reserva
+      dispatch({
+        type: 'CREATE_BOOKING_DATA',
+        payload: {
+          detalles: {
+            ...bookingData.detalles,
+            [field]: data,
+          },
         },
-      }))
+      })
     }
   }
   const handleChange = (
@@ -40,28 +43,32 @@ export default function DetailsForm({ className }: { className: string }) {
   ) => {
     const value = e.target.value
     const name = e.target.name
-    setBookingData((prevData) => ({
-      ...prevData,
-      detalles: {
-        ...prevData.detalles,
-        direccion: {
-          ...prevData.detalles.direccion,
-          [name]: value,
+    dispatch({
+      type: 'CREATE_BOOKING_DATA',
+      payload: {
+        detalles: {
+          ...bookingData.detalles,
+          direccion: {
+            ...bookingData.detalles.direccion,
+            [name]: value,
+          },
         },
       },
-    }))
+    })
   }
   const handleOnValue = (value: string, field: string) => {
-    setBookingData((prevData) => ({
-      ...prevData,
-      detalles: {
-        ...prevData.detalles,
-        direccion: {
-          ...prevData.detalles.direccion,
-          [field]: value,
+    dispatch({
+      type: 'CREATE_BOOKING_DATA',
+      payload: {
+        detalles: {
+          ...bookingData.detalles,
+          direccion: {
+            ...bookingData.detalles.direccion,
+            [field]: value,
+          },
         },
       },
-    }))
+    })
   }
 
   const rectanglesFrecuency = [

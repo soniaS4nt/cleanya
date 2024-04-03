@@ -31,3 +31,25 @@ body {
     text-wrap: balance;
   }
 }
+
+.scrollbar-thumb-gradient {
+  scrollbar-color: #fff #e5e7eb;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 10px;
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #f1f1f12f;
+  background-image:
+    linear-gradient(to bottom, #74788c 0%, #616569fd 100%);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: transparent;
+}

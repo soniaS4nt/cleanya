@@ -6,7 +6,7 @@ export interface IAppointment {
     fecha: Date
     hora: string[]
   }
-  pago: string
+  pago: number
   detalles: {
     frecuencia: { id: number; value: string }
     direccion: {
@@ -19,9 +19,9 @@ export interface IAppointment {
     instrucciones: { id: number; value: string }
   }
   requirements: {
-    rooms: { id: number; value: string }
-    bathrooms: { id: number; value: string }
-    tipo: { id: number; value: string }
+    rooms: { id: number; value: string; price: number }
+    bathrooms: { id: number; value: string; price: number }
+    tipo: { id: number; value: string; price: number }
   }
 }
 
@@ -29,39 +29,42 @@ export interface IAppointment {
 const AppointmentSchema = new Schema<IAppointment>(
   {
     fechaHora: {
-      fecha: { type: Date },
-      hora: [{ type: String }],
+      fecha: { type: Date, required: true },
+      hora: [{ type: String, required: true }],
     },
-    pago: { type: String },
+    pago: { type: Number },
     detalles: {
       frecuencia: {
         id: { type: Number },
-        value: { type: String },
+        value: { type: String, required: true },
       },
       direccion: {
-        region: { type: String },
-        comuna: { type: String },
-        calle: { type: String },
-        numero: { type: String },
+        region: { type: String, required: true },
+        comuna: { type: String, required: true },
+        calle: { type: String, required: true },
+        numero: { type: String, required: true },
         adicionales: { type: String },
       },
       instrucciones: {
         id: { type: Number },
-        value: { type: String },
+        value: { type: String, required: true },
       },
     },
     requirements: {
       rooms: {
         id: { type: Number },
-        value: { type: String },
+        value: { type: String, required: true },
+        price: { type: Number },
       },
       bathrooms: {
         id: { type: Number },
-        value: { type: String },
+        value: { type: String, required: true },
+        price: { type: Number },
       },
       tipo: {
         id: { type: Number },
-        value: { type: String },
+        value: { type: String, required: true },
+        price: { type: Number },
       },
     },
   },

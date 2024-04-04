@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from 'next/server'
-import appointment from '@/models/appoiments'
+import appointments from '@/models/appoiments'
 import { appoimentMapper } from '@/lib/mappers/appoimentMapper'
 import hoursavailable from '@/models/hoursAvailable'
 import dayjs from 'dayjs'
@@ -9,7 +9,7 @@ import { auth } from '../../../auth'
 import clients from '@/models/clients'
 import { clientMapper } from '@/lib/mappers/clientMapper'
 import { ZodError } from 'zod'
-import AppointmentState from '@/models/appointmentState'
+import appointmentStates from '@/models/appointmentState'
 
 export async function POST(request: NextRequest) {
   dbConnect()
@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
       const data = await request.json()
 
       // 1. Crear un nuevo appointment
-      const createdAppointment = await appointment.create(
+      const createdAppointment = await appointments.create(
         [appoimentMapper(data)],
         {
           session,
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
       // si existe le cambio el estado pero solo si no es completed?
 
       // si no existe o es completed creo un nuevo estado
-      const appointmentState = await AppointmentState.create(
+      const appointmentState = await appointmentStates.create(
         [
           {
             appointmentId: createdAppointment[0]._id,

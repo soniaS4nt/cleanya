@@ -1,5 +1,5 @@
 import { generateHtml } from '@/components/templates/generateHtml'
-import { BookingData } from '@/reducers/dataBooking'
+import { BookingData } from '@/lib/definitions'
 import { NextRequest } from 'next/server'
 import nodemailer from 'nodemailer'
 //nodemail

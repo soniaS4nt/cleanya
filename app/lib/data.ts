@@ -5,7 +5,7 @@ import appoiments from '@/models/appoiments'
 import { unstable_noStore as noStore } from 'next/cache'
 import appointmentState from '@/models/appointmentState'
 import mongoose from 'mongoose'
-import { Booking, IAppointment } from './definitions'
+import { Booking, BookingData, IAppointment } from './definitions'
 
 export async function getData() {
   try {
@@ -24,7 +24,7 @@ export async function getData() {
   }
 }
 
-export async function postAppoiment(body: IAppointment) {
+export async function postAppoiment(body: BookingData) {
   try {
     const res = await fetch(`/api/reservas`, {
       method: 'POST',
@@ -50,7 +50,7 @@ export async function postAppoiment(body: IAppointment) {
   }
 }
 
-export async function senEmail(body: IAppointment, id: string) {
+export async function senEmail(body: BookingData, id: string) {
   try {
     const res = await fetch(`/api/send`, {
       method: 'POST',

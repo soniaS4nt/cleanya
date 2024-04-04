@@ -1,5 +1,5 @@
 import { ZodError, z } from 'zod'
-import { IAppointment } from '@/models/appoiments'
+import { IAppointment } from '../definitions'
 
 // Define el esquema de validación con Zod
 const AppointmentSchema = z.object({

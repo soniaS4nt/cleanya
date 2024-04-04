@@ -27,13 +27,6 @@ export default async function PagoForm() {
           },
         ],
         auto_return: 'approved',
-<<<<<<< HEAD
-        back_urls: {
-          success: `${URL}`,
-        },
-        notification_url: `${URL}/api/payment`,
-=======
->>>>>>> 3b77d0240d815e5f157b67090acc0862df238e99
       },
     })
     redirect(preference.sandbox_init_point!)

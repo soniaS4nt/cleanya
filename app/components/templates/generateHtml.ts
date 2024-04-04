@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
-import { BookingData } from '@/reducers/dataBooking'
 import { formattedPago } from '@/lib/utils'
+import { BookingData } from '@/lib/definitions'
 export const generateHtml = (data: BookingData, id: string) => {
   const { client, detalles, fechaHora, pago, requirements } = data
 

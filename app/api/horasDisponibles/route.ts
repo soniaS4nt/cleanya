@@ -1,7 +1,7 @@
 import { dbConnect } from '@/lib/mongodb'
 import { NextRequest, NextResponse } from 'next/server'
 import hoursavailable from '@/models/hoursAvailable'
-import { auth } from '../../../auth'
+import { auth } from '@auth'
 
 export async function GET(request: NextRequest) {
   dbConnect()

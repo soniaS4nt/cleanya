@@ -1,5 +1,5 @@
 import { ZodError, z } from 'zod'
-import { BookingData } from '../definitions'
+import { BookingData } from '@/lib/definitions'
 
 // Definir el esquema de los datos de reserva utilizando Zod
 const BookingDataSchema = z.object({

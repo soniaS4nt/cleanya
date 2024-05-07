@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
+import Logo from '@/components/logo'
 
 const links = [
   {
@@ -69,22 +69,15 @@ export default function TopNav() {
             </svg>
           )}
         </button>
-        <Image
-          src="/logo.svg"
-          alt=""
-          width={100}
-          height={100}
-          className="object-contain my-5 mx-5"
-        />
+        <div className="p-2">
+          <Logo />
+        </div>
       </div>
       <div className="bg-white h-16 w-full hidden sm:flex gap-0 flex-row justify-between items-center">
-        <Image
-          src="/logo.svg"
-          alt=""
-          width={100}
-          height={100}
-          className="mx-16"
-        />
+        <div className="p-2">
+          <Logo />
+        </div>
+
         <div className="flex items-center mx-16">
           {links.map(({ href, name }) => (
             <Link

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { signIn, signOut } from './../../auth'
+import { signIn, signOut } from '@auth'
 import ButtonLogin from './buttonLogin'
 
 export function SignIn({

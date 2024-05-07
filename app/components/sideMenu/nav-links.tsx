@@ -7,8 +7,8 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
-import DocumentsIcon from '../icons/documentsIcon'
-import ChartPieIcoin from '../icons/chartPieIcoin'
+import DocumentsIcon from '@/components/icons/documentsIcon'
+import ChartPieIcoin from '@/components/icons/chartPieIcoin'
 
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.

@@ -51,15 +51,15 @@ export default function Table({ data }: { data: Booking[] }) {
 
   return (
     <>
-      <Card className="flex flex-col justify-center  md:w-3/5">
-        <TableComponent
-          className="sm:p-5 p-1"
-          headers={cabeceras}
-          data={datosFormateados}
-          totalPages={1}
-          onPageChange={handleSelectedDataChange}
-        />
-      </Card>
+      {/*  <Card className="flex flex-col justify-center  md:w-3/5"> */}
+      <TableComponent
+        className="sm:p-5 p-1"
+        headers={cabeceras}
+        data={datosFormateados}
+        totalPages={1}
+        onPageChange={handleSelectedDataChange}
+      />
+      {/* </Card> */}
       <ModalComponent
         className="max-w-2xl"
         onOpen={openModal}

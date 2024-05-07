@@ -1,14 +1,12 @@
 import type { Metadata } from 'next'
-import { Inter, Josefin_Sans } from 'next/font/google'
+import { Josefin_Sans } from 'next/font/google'
 import '@/globals.css'
-import TopNav from '@/components/navBar/topNav'
 import { Toaster } from 'sonner'
 import FooterSection from '@/components/footerSection'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { BookingProvider } from '@/contexts/bookingsContext'
-import Header from './components/header'
+import Header from '@/components/header'
 
-const inter = Inter({ subsets: ['latin'] })
 const joseFin = Josefin_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {

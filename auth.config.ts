@@ -3,23 +3,19 @@ import type { NextAuthConfig } from 'next-auth'
 export const authConfig = {
   pages: {
     signIn: '/auth/login',
+    signOut: '',
   },
   callbacks: {
-    async authorized({ auth, request }) {
+    async authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user
-      const isOnBookingPage = request?.nextUrl?.pathname === '/reservar'
-
-      // Permitir acceso a todas las páginas si el usuario está autenticado
-      if (isLoggedIn) {
-        return true
+      const isOnDashboard = nextUrl.pathname.startsWith('/dashboard')
+      if (isOnDashboard) {
+        if (isLoggedIn) return true
+        return false // Redirect unauthenticated users to login page
+      } else if (isLoggedIn) {
+        //FIXME:aqui me deja entrar solo al dashboar y lo que viene despues
+        return Response.redirect(new URL('/dashboard', nextUrl))
       }
-
-      // Prohibir acceso a la página de reservar para usuarios no autenticados
-      if (isOnBookingPage) {
-        return false
-      }
-
-      // Permitir acceso a todas las demás páginas para usuarios no autenticados
       return true
     },
   },

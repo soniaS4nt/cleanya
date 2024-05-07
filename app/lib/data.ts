@@ -1,11 +1,11 @@
 import { toast } from 'sonner'
 import { API_URL } from './constants'
 import { dbConnect } from '@/lib/mongodb'
-import appoiments from '@/models/appoiments'
+import appoiments from '@/models/appoinments'
 import { unstable_noStore as noStore } from 'next/cache'
 import appointmentState from '@/models/appointmentState'
 import mongoose from 'mongoose'
-import { Booking, BookingData, IAppointment } from './definitions'
+import { Booking, BookingData } from './definitions'
 
 export async function getData() {
   try {
@@ -84,8 +84,8 @@ export async function fetchBookings() {
     const bookings: Booking[] = response.map((item) => ({
       id: item._id.toString(),
       estado: item.state || '',
-      fecha: item?.fechaHora?.fecha || '',
-      hora: item?.fechaHora?.hora || '',
+      fecha: item?.fechaHora?.fecha,
+      hora: item?.fechaHora?.hora || [''],
       pago: item?.pago || 0,
       direccion: item?.detalles?.direccion || '',
       frecuencia: item?.detalles?.frecuencia?.value || '',
@@ -93,7 +93,7 @@ export async function fetchBookings() {
       habitaciones: item?.requirements?.rooms.value || '',
       baños: item?.requirements?.bathrooms?.value || '',
       tipo_limpieza: item?.requirements?.tipo?.value || '',
-      fecha_creacion: item?.createdAt || '',
+      fecha_creacion: (item as any).createdAt || '',
     }))
     return bookings
   } catch (error) {

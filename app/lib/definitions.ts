@@ -1,5 +1,7 @@
 import { DatePickerValue } from '@tremor/react'
-import { ObjectId } from 'mongodb'
+import { Dayjs } from 'dayjs'
+import { ObjectId, Timestamp } from 'mongodb'
+import { Date } from 'mongoose'
 
 // Define una interfaz para los detalles de dirección
 export interface Direccion {
@@ -84,7 +86,9 @@ export interface IAppointment {
   }
   state: State
 }
-
+/* export interface AppoimentWithCreatedAt extends IAppointment {
+  createdAt: Date
+} */
 // Define una interfaz para las horas disponibles
 export interface Hour {
   hours: string
@@ -117,14 +121,14 @@ export interface UserI {
 export interface Booking {
   id: string
   estado: string
-  fecha: string
-  hora: string
+  fecha: Date
+  hora: string[]
   pago: number
-  direccion: string
+  direccion: Direccion
   frecuencia: string
   instrucciones: string
   habitaciones: string
   baños: string
   tipo_limpieza: string
-  fecha_creacion: string
+  fecha_creacion: Timestamp
 }

@@ -21,7 +21,8 @@ export default function Table({ data }: { data: Booking[] }) {
   }
   const datosFormateados = data?.map((item) => ({
     ...item,
-    fecha: item.fecha ? dayjs(item.fecha).format('DD/MM/YYYY') : '',
+    fecha:
+      item.fecha instanceof Date ? dayjs(item.fecha).format('DD/MM/YYYY') : '',
     hora: item.hora[0],
     pago: formattedPago(item.pago),
     estado: (

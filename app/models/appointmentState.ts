@@ -18,5 +18,5 @@ const AppointmentstateSchema = new Schema({
   timestamp: { type: Date, default: Date.now },
 })
 
-export default models.Appointmentstate ||
+export default models?.Appointmentstate ||
   model('Appointmentstate', AppointmentstateSchema)

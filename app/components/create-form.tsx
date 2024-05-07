@@ -90,10 +90,12 @@ export default function CreateForm({ className }: { className: string }) {
     })
   }
 
+  const availableDates = data.map(({ date }) => date)
   return (
     <form className={className}>
       <div className="min-w-72 mb-10">
         <DatePickerHero
+          availableDates={availableDates}
           onValueChange={handleChange}
           value={bookingData.fechaHora?.fecha as DatePickerValue}
         />

@@ -28,7 +28,7 @@ const tabs = [
         <p className="from-neutral-900 font-extrabold text-2xl">
           Reserva la fecha
         </p>
-        <CreateForm className="flex flex-col items-center pt-16 my-5" />
+        <CreateForm className="flex flex-col items-center pt-80 my-5" />
       </div>
     ),
   },
@@ -60,7 +60,7 @@ const tabs = [
 ]
 function Booking() {
   return (
-    <div className="block h-screen m-2 mb-10">
+    <div className="block h-screen pt-16 m-4 mb-10">
       <TabsHero tabs={tabs} className="mt-16 h-auto" />
     </div>
   )

@@ -1,9 +1,7 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import ButtonLogin from '../buttonLogin'
-import { auth } from '../../../auth'
 
 const links = [
   {
@@ -32,16 +30,9 @@ export default function TopNav() {
   }
 
   return (
-    <nav className="fixed top-0 w-full z-10 mb-4 shadow">
+    <nav /* className="fixed top-0 w-full z-10 mb-4 shadow" */>
       {/* Icono de menú para dispositivos móviles */}
-      <div className="flex sm:hidden  flex-row justify-between bg-white">
-        <Image
-          src="/logo.svg"
-          alt=""
-          width={100}
-          height={100}
-          className="object-contain my-5 mx-5"
-        />
+      <div className="flex sm:hidden  flex-row justify-between">
         <button
           onClick={toggleMobileMenu}
           className="text-primary-dark focus:outline-none"
@@ -78,6 +69,13 @@ export default function TopNav() {
             </svg>
           )}
         </button>
+        <Image
+          src="/logo.svg"
+          alt=""
+          width={100}
+          height={100}
+          className="object-contain my-5 mx-5"
+        />
       </div>
       <div className="bg-white h-16 w-full hidden sm:flex gap-0 flex-row justify-between items-center">
         <Image
@@ -98,13 +96,12 @@ export default function TopNav() {
               {name}
             </Link>
           ))}
-          <ButtonLogin href={'/auth/login'} key={'btn'} />
         </div>
       </div>
       {isMobileMenuOpen && (
         <div
           className={
-            'fixed inset-0  z-50 flex flex-col sm:hidden py-5 mt-16 bg-white'
+            'fixed inset-0  z-50 flex flex-col sm:hidden py-5 mt-[95px] bg-white'
           }
         >
           {links.map(({ href, name }) => (
@@ -118,12 +115,6 @@ export default function TopNav() {
               {name}
             </Link>
           ))}
-
-          <ButtonLogin
-            href={'/auth/login'}
-            key={'btn'}
-            onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
-          />
         </div>
       )}
     </nav>

@@ -53,5 +53,5 @@ const AppointmentSchema = new Schema<IAppointment>(
 )
 
 // 3. Create a Model.
-export default models.Appointment ||
+export default models?.Appointment ||
   model<IAppointment>('Appointment', AppointmentSchema)

@@ -10,7 +10,7 @@ const image = [
 export default function HeroSection() {
   return (
     <>
-      <header className="flex flex-col items-center justify-center pt-16 my-5 md:bg-[url('/HeroIllustration.svg')] bg-no-repeat bg-contain md:w-screen md:h-screen mb-5">
+      <header className="flex flex-col items-center justify-center pt-80 my-5 md:bg-[url('/HeroIllustration.svg')] bg-no-repeat bg-contain md:w-screen md:h-screen mb-5">
         <h1 className="lg:font-extrabold font-bold text-4xl text-center">
           Deja que hagamos el trabajo sucio
         </h1>

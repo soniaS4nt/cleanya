@@ -103,7 +103,6 @@ export const appoimentMapper = (data: IAppointment) => {
   if (validatedData.success) {
     // Acceder a los datos validados
     const { fechaHora, pago, detalles, requirements } = validatedData.data
-    console.log(fechaHora.fecha)
 
     // Devolver los datos validados
     return {

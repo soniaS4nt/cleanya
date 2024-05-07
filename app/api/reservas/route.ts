@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from 'next/server'
-import appointments from '@/models/appoiments'
+import appointments from '@/models/appoinments'
 import { appoimentMapper } from '@/lib/mappers/appoimentMapper'
 import hoursavailable from '@/models/hoursAvailable'
 import dayjs from 'dayjs'

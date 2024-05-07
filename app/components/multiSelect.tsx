@@ -19,7 +19,6 @@ export default function MultiSelectComponent({
   const handleChange = (newValue: string[]) => {
     onValueChange(newValue) // Pasar el nuevo valor al prop onValueChange
   }
-
   return (
     <MultiSelect
       className="mx-auto max-w-md"
@@ -29,16 +28,16 @@ export default function MultiSelectComponent({
       key="multi"
       placeholder="Seleccionar hora"
     >
-      {options && options.length > 0 ? (
-        options.map((hours, index) => (
+      {options.map((hours) =>
+        options && options.length > 0 ? (
           <MultiSelectItem key={hours.hours} value={hours.hours}>
             {hours.hours}
           </MultiSelectItem>
-        ))
-      ) : (
-        <div className="p-2 text-center" key="no-data">
-          No hay horas disponibles
-        </div>
+        ) : (
+          <div className="p-2 text-center" key={hours.hours}>
+            No hay horas disponibles
+          </div>
+        )
       )}
     </MultiSelect>
   )

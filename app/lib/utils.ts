@@ -82,3 +82,37 @@ export const formattedPago = (pago: number) =>
     style: 'currency',
     currency: 'CLP',
   })
+
+// Función para verificar si una fecha está disponible
+function isDateAvailable(date: Date, availableDates: string[]): boolean {
+  // Convierte la fecha a formato 'D/M/YYYY' para comparar
+  const formattedDate = `${date.getDate()}/${
+    date.getMonth() + 1
+  }/${date.getFullYear()}`
+
+  return availableDates.includes(formattedDate)
+}
+
+// Genera todas las fechas del año calendario (por ejemplo, 2024)
+function generateCalendarDates(year: number): Date[] {
+  const startDate = new Date(year, 0, 1) // 1 de enero
+  const endDate = new Date(year, 11, 31) // 31 de diciembre
+
+  const calendarDates: Date[] = []
+  let currentDate = startDate
+
+  while (currentDate <= endDate) {
+    calendarDates.push(currentDate)
+    currentDate = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000) // Siguiente día
+  }
+
+  return calendarDates
+}
+
+// Genera todas las fechas del año calendario 2024
+const calendarYear = 2024
+const allCalendarDates = generateCalendarDates(calendarYear)
+
+// Filtra las fechas disponibles
+export const filteredDates = (availableDates: string[]) =>
+  allCalendarDates.filter((date) => !isDateAvailable(date, availableDates))

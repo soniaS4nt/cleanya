@@ -8,11 +8,13 @@ import {
   DatePickerValue,
 } from '@tremor/react'
 import { es } from 'date-fns/locale'
+import { filteredDates } from '@/lib/utils'
 
 type Props = {
   name?: string
   title?: string
   value: DatePickerValue
+  availableDates: any
   onValueChange: (date: DatePickerValue) => void
 }
 export function DateRangePickerHero({ title }: Props) {
@@ -46,7 +48,11 @@ export function DateRangePickerHero({ title }: Props) {
   )
 }
 
-export function DatePickerHero({ onValueChange, value }: Props) {
+export function DatePickerHero({
+  onValueChange,
+  value,
+  availableDates,
+}: Props) {
   /*   const [value, setValue] = useState<DatePickerValue>() */
 
   // Función para manejar cambios en la selección de fecha
@@ -54,6 +60,7 @@ export function DatePickerHero({ onValueChange, value }: Props) {
     /*  setValue(newValue) // Actualiza el estado con la nueva fecha */
     onValueChange(newValue) // Llama a la función proporcionada con la nueva fecha
   }
+  const disabledDates = filteredDates(availableDates)
 
   return (
     <DatePicker
@@ -65,6 +72,7 @@ export function DatePickerHero({ onValueChange, value }: Props) {
       color="blue"
       enableClear
       id="calendar"
+      disabledDates={disabledDates}
     />
   )
 }

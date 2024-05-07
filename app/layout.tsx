@@ -6,6 +6,7 @@ import { Toaster } from 'sonner'
 import FooterSection from '@/components/footerSection'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { BookingProvider } from '@/contexts/bookingsContext'
+import Header from './components/header'
 
 const inter = Inter({ subsets: ['latin'] })
 const joseFin = Josefin_Sans({ subsets: ['latin'] })
@@ -36,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${joseFin.className} antialiased`}>
-        <TopNav />
+        <Header />
         <BookingProvider>{children}</BookingProvider>
         <Toaster richColors expand />
         <FooterSection />

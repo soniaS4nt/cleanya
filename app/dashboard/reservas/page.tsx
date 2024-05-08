@@ -5,7 +5,10 @@ export default async function Page() {
   const reservas = await fetchBookings()
 
   return (
-    <div className="flex flex-row h-screen m-2 my-80 justify-center">
+    <div className="w-full">
+      <div className="flex w-full items-center justify-between mb-2">
+        <h1 className={` text-2xl`}>Reservas</h1>
+      </div>
       <Table data={reservas} />
     </div>
   )

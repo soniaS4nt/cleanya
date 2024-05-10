@@ -99,35 +99,42 @@ export function TableComponent({
             )}
           </TableRow>
         </TableHead>
-        <TableBody>
-          {data.map((item, dataIndex) => (
-            <TableRow key={item.id}>
-              <TableCell
-                className={clsx('hidden text-right', {
-                  flex: selecteable || allChecked,
-                })}
-              >
-                <input
-                  type="checkbox"
-                  checked={selectedRows.some(
-                    (selectedRow, index) => selectedRow.id === item.id
-                  )}
-                  onChange={() => toggleRowSelection(item)}
-                />
-              </TableCell>
-              {headers.map(
-                (header, headerIndex) =>
-                  // Solo renderiza la celda si la cabecera es visible o si no tiene la propiedad visible
-                  (header.visible === undefined || header.visible) && (
-                    <TableCell key={header.key} className={' text-center'}>
-                      {item[header.key]}
-                    </TableCell>
-                  )
-              )}
-            </TableRow>
-          ))}
-        </TableBody>
+        {data.length === 0 ? (
+          <div className="flex justify-center items-center w-screen">
+            <p className="text-center py-5">No hay datos para mostrar</p>
+          </div>
+        ) : (
+          <TableBody>
+            {data.map((item, dataIndex) => (
+              <TableRow key={item.id}>
+                <TableCell
+                  className={clsx('hidden text-right', {
+                    flex: selecteable || allChecked,
+                  })}
+                >
+                  <input
+                    type="checkbox"
+                    checked={selectedRows.some(
+                      (selectedRow, index) => selectedRow.id === item.id
+                    )}
+                    onChange={() => toggleRowSelection(item)}
+                  />
+                </TableCell>
+                {headers.map(
+                  (header, headerIndex) =>
+                    // Solo renderiza la celda si la cabecera es visible o si no tiene la propiedad visible
+                    (header.visible === undefined || header.visible) && (
+                      <TableCell key={header.key} className={' text-center'}>
+                        {item[header.key]}
+                      </TableCell>
+                    )
+                )}
+              </TableRow>
+            ))}
+          </TableBody>
+        )}
       </Table>
+
       {totalPages && (
         <div className="mt-5 flex w-full justify-center">
           <Pagination totalPages={totalPages} />

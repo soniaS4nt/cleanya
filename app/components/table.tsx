@@ -1,7 +1,13 @@
 'use client'
 import { useState } from 'react'
 import { TableComponent, TableData } from '@/components/tableComponent'
-import { Card, Divider, TextInput, Textarea } from '@tremor/react'
+import {
+  Card,
+  DateRangePickerValue,
+  Divider,
+  TextInput,
+  Textarea,
+} from '@tremor/react'
 import { Badge } from '@tremor/react'
 import dayjs from 'dayjs'
 import { formattedPago } from '@/lib/utils'
@@ -10,15 +16,62 @@ import { ModalComponent } from './modalComponent'
 import clsx from 'clsx'
 import { Booking, Direccion, IAppointment, State } from '@/lib/definitions'
 import { COLORS } from '@/lib/constants'
+import GroupButtons from './buttons/groupButtons'
+import { DateRangePickerHero } from './calendars'
+import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 
-export default function Table({ data }: { data: Booking[] }) {
+export default function Table({
+  data = [],
+
+  currentPage,
+  pages,
+}: {
+  data: Booking[]
+  currentPage: number
+  pages: number
+}) {
   const [selectedData, setSelectedData] = useState<TableData[]>([]) // Estado para almacenar la data de los rows seleccionados
   const [openModal, setOpenModal] = useState(false)
   const [info, setInfo] = useState<any>(null)
+  const [dateRange, setDateRange] = useState<
+    | {
+        from: Date | null
+        to: Date | null
+      }
+    | DateRangePickerValue
+  >({ from: null, to: null })
+
   // Función de devolución de llamada para manejar la actualización de la data seleccionada
   const handleSelectedDataChange = (rows: TableData[]) => {
     setSelectedData(rows)
   }
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
+  const { replace } = useRouter()
+
+  function handleParams(title: string | undefined, dateRange: any) {
+    const params = new URLSearchParams(searchParams)
+    if (title) {
+      params.set('state', title)
+    } else {
+      params.delete('state')
+    }
+    // Agregar las fechas seleccionadas si están disponibles
+    if (dateRange?.from) {
+      params.set('startDate', dateRange.from.toISOString())
+    } else {
+      params.delete('startDate')
+    }
+
+    if (dateRange?.to) {
+      params.set('endDate', dateRange.to.toISOString())
+    } else {
+      params.delete('endDate')
+    }
+
+    replace(`${pathname}?${params.toString()}`)
+  }
+
   const datosFormateados = data?.map((item) => ({
     ...item,
     fecha:
@@ -49,17 +102,33 @@ export default function Table({ data }: { data: Booking[] }) {
     { label: 'Detalle', key: 'icono' },
   ]
 
+  const Buttons = [
+    { title: 'Pendientes', items: 7 },
+    { title: 'Completadas', items: 10 },
+    { title: 'Reservadas', items: 15 },
+    { title: 'Canceladas', items: 0 },
+  ]
+  const handleRange = (value: any) => {
+    setDateRange(value)
+    handleParams(undefined, value)
+  }
   return (
     <>
-      {/*  <Card className="flex flex-col justify-center  md:w-3/5"> */}
+      <div className="flex flex-col md:flex-row justify-between items-center my-2">
+        <GroupButtons
+          buttons={Buttons}
+          key={'buttons'}
+          onClick={(title) => handleParams(title, dateRange)}
+        />
+        <DateRangePickerHero onValueChange={(value) => handleRange(value)} />
+      </div>
       <TableComponent
         className="sm:p-5 p-1"
         headers={cabeceras}
         data={datosFormateados}
-        totalPages={1}
+        totalPages={pages}
         onPageChange={handleSelectedDataChange}
       />
-      {/* </Card> */}
       <ModalComponent
         className="max-w-2xl"
         onOpen={openModal}

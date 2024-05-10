@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { signIn, signOut } from '@auth'
-import ButtonLogin from './buttonLogin'
+import ButtonLogin from './buttons/buttonLogin'
 
 export function SignIn({
   ...props

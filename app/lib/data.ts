@@ -5,7 +5,7 @@ import appoiments from '@/models/appoinments'
 import { unstable_noStore as noStore } from 'next/cache'
 import appointmentState from '@/models/appointmentState'
 import mongoose from 'mongoose'
-import { Booking, BookingData } from './definitions'
+import { Booking, BookingData, stateButtonDictionary } from './definitions'
 
 export async function getData() {
   try {
@@ -74,13 +74,37 @@ export async function senEmail(body: BookingData, id: string) {
     throw error
   }
 }
-
-export async function fetchBookings() {
+const LIMIT_PAGES = 6
+export async function fetchBookings(
+  state: string,
+  startDate: Date | string,
+  endDate: Date | string,
+  curretPage: number
+) {
   noStore()
   dbConnect()
-  try {
-    const response = await appoiments.find({})
+  const estadoKey = state as keyof typeof stateButtonDictionary
+  const estado = stateButtonDictionary[estadoKey]
+  let query: any = {}
+  if (state) {
+    query.state = estado
+  }
+  if (startDate && endDate) {
+    query['fechaHora.fecha'] = {
+      $gte: startDate,
+      $lte: endDate,
+    }
+  }
 
+  try {
+    const skip = (curretPage - 1) * LIMIT_PAGES
+    const response = await appoiments
+      .find(query)
+      .skip(skip)
+      .limit(LIMIT_PAGES)
+      .sort({ 'fechaHora.fecha': -1 })
+    const documents = await appoiments.find(query).countDocuments()
+    const totalPages = Math.ceil(documents / LIMIT_PAGES)
     const bookings: Booking[] = response.map((item) => ({
       id: item._id.toString(),
       estado: item.state || '',
@@ -95,7 +119,7 @@ export async function fetchBookings() {
       tipo_limpieza: item?.requirements?.tipo?.value || '',
       fecha_creacion: (item as any).createdAt || '',
     }))
-    return bookings
+    return { bookings, totalPages }
   } catch (error) {
     console.error('Error fetching data:', error)
     throw error

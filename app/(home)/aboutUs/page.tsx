@@ -1,4 +1,4 @@
-import ButtonBooking from '@/components/buttonBooking'
+import ButtonBooking from '@/components/buttons/buttonBooking'
 import ContactSection from '@/components/contactSection'
 import { Metadata } from 'next'
 import Image from 'next/image'

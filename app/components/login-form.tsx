@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from './button'
+import { Button } from './buttons/button'
 import ArrowRightIcon from '@/components/icons/arrowRigth'
 
 import { useFormState, useFormStatus } from 'react-dom'

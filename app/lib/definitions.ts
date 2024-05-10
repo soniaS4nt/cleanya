@@ -66,6 +66,12 @@ export enum Status {
   Canceled = 'canceled',
   Completed = 'completed',
 }
+export const stateButtonDictionary = {
+  Pendientes: 'pending',
+  Reservadas: 'reserved',
+  Canceladas: 'canceled',
+  Completadas: 'completed',
+}
 // Define una interfaz para una cita
 export interface IAppointment {
   id: string

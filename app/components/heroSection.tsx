@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import ButtonBooking from '@/components/buttonBooking'
+import ButtonBooking from '@/components/buttons/buttonBooking'
 import { CardPhoto } from './cardPhoto'
 import QuestionFrequentComponent from './questionFrequent'
 const image = [

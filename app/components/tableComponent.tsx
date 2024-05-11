@@ -125,7 +125,7 @@ export function TableComponent({
                   />
                 </TableCell>
                 {headers.map(
-                  (header, headerIndex) =>
+                  (header) =>
                     // Solo renderiza la celda si la cabecera es visible o si no tiene la propiedad visible
                     (header.visible === undefined || header.visible) && (
                       <TableCell key={header.key} className={' text-center'}>

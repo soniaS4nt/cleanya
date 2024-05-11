@@ -1,4 +1,4 @@
-import { fetchBookings } from '@/lib/data'
+import { fetchBookings, fetchStatesBookings } from '@/lib/data'
 import Table from '@/components/table'
 
 export default async function Page({
@@ -22,13 +22,14 @@ export default async function Page({
     endDate,
     currentPage
   )
+  const states = await fetchStatesBookings()
 
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between mb-2">
         <h1 className={` text-2xl`}>Reservas</h1>
       </div>
-      <Table data={bookings} currentPage={currentPage} pages={totalPages} />
+      <Table data={bookings} pages={totalPages} states={states} />
     </div>
   )
 }

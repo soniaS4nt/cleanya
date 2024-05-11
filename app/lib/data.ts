@@ -85,6 +85,7 @@ export async function fetchBookings(
   dbConnect()
   const estadoKey = state as keyof typeof stateButtonDictionary
   const estado = stateButtonDictionary[estadoKey]
+
   let query: any = {}
   if (state) {
     query.state = estado
@@ -148,5 +149,27 @@ export async function updateStatusAppoiment(id: string, status: string) {
     session.endSession()
     console.error('Error fetching data:', error)
     return { message: `${error}`, status: 0 }
+  }
+}
+
+export async function fetchStatesBookings() {
+  noStore()
+  dbConnect()
+  try {
+    const uniqueStates = await appoiments.aggregate([
+      {
+        $group: {
+          _id: '$state',
+          count: { $sum: 1 }, // Cuenta el número de documentos en cada grupo
+        },
+      },
+      {
+        $sort: { _id: 1 }, // Ordena los resultados por el ID del estado (opcional)
+      },
+    ])
+    return uniqueStates
+  } catch (error) {
+    console.error('Error al obtener los estados:', error)
+    throw error
   }
 }

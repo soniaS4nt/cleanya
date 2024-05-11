@@ -14,7 +14,7 @@ import { formattedPago } from '@/lib/utils'
 import { RiEyeLine } from '@remixicon/react'
 import { ModalComponent } from './modalComponent'
 import clsx from 'clsx'
-import { Booking, Direccion, IAppointment, State } from '@/lib/definitions'
+import { Booking, State, stateButtonDictionary } from '@/lib/definitions'
 import { COLORS } from '@/lib/constants'
 import GroupButtons from './buttons/groupButtons'
 import { DateRangePickerHero } from './calendars'
@@ -22,13 +22,12 @@ import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 
 export default function Table({
   data = [],
-
-  currentPage,
   pages,
+  states = [],
 }: {
   data: Booking[]
-  currentPage: number
   pages: number
+  states: any[]
 }) {
   const [selectedData, setSelectedData] = useState<TableData[]>([]) // Estado para almacenar la data de los rows seleccionados
   const [openModal, setOpenModal] = useState(false)
@@ -102,12 +101,26 @@ export default function Table({
     { label: 'Detalle', key: 'icono' },
   ]
 
-  const Buttons = [
-    { title: 'Pendientes', items: 7 },
-    { title: 'Completadas', items: 10 },
-    { title: 'Reservadas', items: 15 },
-    { title: 'Canceladas', items: 0 },
-  ]
+  const matchedButtons = Object.keys(stateButtonDictionary).map(
+    (spanishTitle) => {
+      const englishTitle =
+        stateButtonDictionary[
+          spanishTitle as keyof typeof stateButtonDictionary
+        ]
+      // Buscar el resultado correspondiente en el array de resultados
+      const match = states.find(({ _id }) => _id === englishTitle)
+
+      // Si se encuentra un resultado, devolver el objeto con el título y el recuento
+      if (match) {
+        return { title: spanishTitle, items: match.count }
+      } else {
+        // Si no se encuentra un resultado, devolver el objeto con el título y el recuento igual a cero
+        return { title: spanishTitle, items: 0 }
+      }
+    }
+  )
+
+  console.log('Botones coincidentes:', matchedButtons)
   const handleRange = (value: any) => {
     setDateRange(value)
     handleParams(undefined, value)
@@ -116,7 +129,7 @@ export default function Table({
     <>
       <div className="flex flex-col md:flex-row justify-between items-center my-2">
         <GroupButtons
-          buttons={Buttons}
+          buttons={matchedButtons}
           key={'buttons'}
           onClick={(title) => handleParams(title, dateRange)}
         />

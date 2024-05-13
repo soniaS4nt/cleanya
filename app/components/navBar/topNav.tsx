@@ -94,7 +94,7 @@ export default function TopNav() {
       {isMobileMenuOpen && (
         <div
           className={
-            'fixed inset-0  z-50 flex flex-col sm:hidden py-5 mt-[95px] bg-white'
+            'fixed inset-0  z-50 flex flex-col sm:hidden py-5 mt-[64px] bg-white'
           }
         >
           {links.map(({ href, name }) => (

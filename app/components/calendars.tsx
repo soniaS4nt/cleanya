@@ -26,10 +26,7 @@ export function DateRangePickerHero({
     from: new Date(2023, 1, 1),
     to: new Date(),
   })
-  const handleValueChange = (newValue: {
-    from: Date | undefined
-    to: Date | undefined
-  }) => {
+  const handleValueChange = (newValue: DateRangePickerValue) => {
     setValue(newValue)
     onValueChange(newValue) // Llama a la función proporcionada por el padre para actualizar el valor
   }

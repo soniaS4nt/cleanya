@@ -120,7 +120,6 @@ export default function Table({
     }
   )
 
-  console.log('Botones coincidentes:', matchedButtons)
   const handleRange = (value: any) => {
     setDateRange(value)
     handleParams(undefined, value)

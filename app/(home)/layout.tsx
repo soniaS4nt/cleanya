@@ -6,6 +6,7 @@ import FooterSection from '@/components/footerSection'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { BookingProvider } from '@/contexts/bookingsContext'
 import Header from '@/components/header'
+import WhatsaapButton from '@/components/buttons/whatsaapButton'
 
 const joseFin = Josefin_Sans({ subsets: ['latin'] })
 
@@ -37,6 +38,9 @@ export default function RootLayout({
       <body className={`${joseFin.className} antialiased`}>
         <Header />
         <BookingProvider>{children}</BookingProvider>
+        <div className="fixed bottom-4 right-4 z-50">
+          <WhatsaapButton />
+        </div>
         <Toaster richColors expand />
         <FooterSection />
         <SpeedInsights />

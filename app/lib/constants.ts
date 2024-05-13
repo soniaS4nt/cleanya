@@ -7,3 +7,5 @@ export const COLORS: ColorMap = {
   canceled: 'red',
   completed: 'tremor-brand',
 }
+
+export const TEXT = 'Hola, necesito una limpieza, ¿me podrían ayudar?'

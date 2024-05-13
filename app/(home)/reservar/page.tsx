@@ -60,8 +60,8 @@ const tabs = [
 ]
 function Booking() {
   return (
-    <div className="block h-screen pt-16 m-4 mb-10">
-      <TabsHero tabs={tabs} className="mt-16 h-auto" />
+    <div className="block h-screen pt-16 m-4 mb-20">
+      <TabsHero tabs={tabs} className=" h-auto" />
     </div>
   )
 }

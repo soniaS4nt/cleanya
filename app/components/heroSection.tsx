@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import ButtonBooking from '@/components/buttons/buttonBooking'
 import { CardPhoto } from './cardPhoto'
-import QuestionFrequentComponent from './questionFrequent'
 const image = [
   'https://www.65ymas.com/uploads/s1/36/16/74/bigstock-wife-housekeeping-and-cleaning-357648977.jpeg',
   'https://www.65ymas.com/uploads/s1/36/16/74/bigstock-wife-housekeeping-and-cleaning-357648977.jpeg',

@@ -6,12 +6,17 @@ const AppointmentSchema = z.object({
   fechaHora: z
     .object(
       {
-        fecha: z.string().datetime(),
+        fecha: z.date(),
         hora: z.array(z.string()),
       },
       { invalid_type_error: 'campos requerido' }
     )
-    .required(),
+    .required()
+    .refine((val) => val.hora.length > 0, {
+      // Añadir validación adicional para asegurarse de que la hora esté presente
+      message: 'La hora es requerida',
+      path: ['fechaHora'],
+    }),
   pago: z.number(),
   detalles: z
     .object(
@@ -91,7 +96,7 @@ const AppointmentSchema = z.object({
 export const appoimentMapper = (data: IAppointment) => {
   const RequiredAppointmentSchema = AppointmentSchema.partial().merge(
     AppointmentSchema.pick({
-      fechaHora: true, //hora no es requerido ??
+      fechaHora: true,
       pago: true,
       detalles: true,
       requirements: true,
@@ -99,7 +104,7 @@ export const appoimentMapper = (data: IAppointment) => {
   )
 
   // Validar los datos de entrada utilizando el esquema de Zod
-  const validatedData = AppointmentSchema.safeParse(data)
+  const validatedData = RequiredAppointmentSchema.safeParse(data)
   if (validatedData.success) {
     // Acceder a los datos validados
     const { fechaHora, pago, detalles, requirements } = validatedData.data

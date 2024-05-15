@@ -5,7 +5,6 @@ import Credentials from 'next-auth/providers/credentials'
 import { z } from 'zod'
 import { authConfig } from './auth.config'
 import bcrypt from 'bcrypt'
-import { UserI } from '@/lib/definitions'
 
 async function getUser(email: string) {
   dbConnect()
@@ -26,7 +25,10 @@ export const { auth, signIn, signOut } = nextAuth({
     Credentials({
       async authorize(credentials) {
         const parsedCredentials = z
-          .object({ email: z.string().email(), password: z.string().min(6) })
+          .object({
+            email: z.string().email(),
+            password: z.string().min(6),
+          })
           .safeParse(credentials)
 
         if (parsedCredentials.success) {
@@ -36,7 +38,7 @@ export const { auth, signIn, signOut } = nextAuth({
           const passwordsMatch = await bcrypt.compare(password, user.password)
 
           if (passwordsMatch) {
-            return { name: user.name, email: user.email }
+            return { name: user.name, email: user.email, image: user.image }
           }
         }
 

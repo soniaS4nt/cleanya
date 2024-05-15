@@ -3,7 +3,7 @@ import { RiWhatsappLine } from '@remixicon/react'
 
 export default function WhatsaapButton() {
   return (
-    <button className="bg-white rounded-full shadow-xl">
+    <button className="bg-white rounded-full shadow-xl" name="ws button">
       <a
         href={`http://wa.me/56956468634?text=${encodeURIComponent(TEXT)}`}
         target="_blank"

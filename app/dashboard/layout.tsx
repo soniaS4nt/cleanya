@@ -1,9 +1,17 @@
-import '@/globals.css'
-
-import SideNav from '@/components/sideMenu/sidenav'
 import { Toaster } from 'sonner'
+import SideNav from '@/components/sideMenu/sidenav'
+import '@/globals.css'
+import { auth } from '@auth'
+import Image from 'next/image'
+import PerfilComponent from '@/components/perfilComponent'
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  const perfil = await auth()
+
   return (
     <html lang="es">
       <body>
@@ -12,6 +20,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <SideNav />
           </div>
           <div className="flex-grow p-6 md:overflow-y-auto md:p-2">
+            {/* perfil */}
+            <PerfilComponent
+              name={perfil?.user?.name}
+              image={perfil?.user?.image}
+            />
             {children}
           </div>
           <Toaster richColors expand />

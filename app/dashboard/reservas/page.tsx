@@ -11,18 +11,20 @@ export default async function Page({
     startDate: Date
     endDate: Date
     page?: string
+    per_page?: number
   }
 }) {
   const state = searchParams?.state || ''
   const startDate = searchParams?.startDate || ''
   const endDate = searchParams?.endDate || ''
-
+  const perPage = Number(searchParams?.per_page) || 5
   const currentPage = Number(searchParams?.page) || 1
   const { bookings, totalPages } = await fetchBookings(
     state,
     startDate,
     endDate,
-    currentPage
+    currentPage,
+    perPage
   )
   const states = await fetchStatesBookings()
 
@@ -32,7 +34,11 @@ export default async function Page({
         <h1 className={` text-2xl`}>Reservas</h1>
       </div>
       <Suspense fallback={<InvoicesTableSkeleton />}>
-        <Table data={bookings} pages={totalPages} states={states} />
+        <Table
+          data={JSON.parse(JSON.stringify(bookings))}
+          pages={totalPages}
+          states={states}
+        />
       </Suspense>
     </div>
   )

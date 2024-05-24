@@ -11,6 +11,7 @@ import {
 } from '@tremor/react'
 import Pagination from './pagination'
 import clsx from 'clsx'
+import NumberPerPage from './numberPerPage'
 
 type TableHeader = {
   label: string // Nombre de la cabecera
@@ -41,6 +42,12 @@ export function TableComponent({
 }) {
   const [selectedRows, setSelectedRows] = useState<TableData[]>([])
   const [selectAllChecked, setSelectAllChecked] = useState<boolean>(false)
+  const [value, setValue] = useState('5')
+
+  const handleValueChange = (newValue: string) => {
+    setValue(newValue)
+    console.log('Nuevo valor seleccionado:', newValue)
+  }
 
   const toggleRowSelection = (row: TableData) => {
     // Verifica si el row ya está seleccionado
@@ -141,6 +148,7 @@ export function TableComponent({
       {totalPages ? (
         <div className="mt-5 flex w-full justify-center">
           <Pagination totalPages={totalPages} />
+          <NumberPerPage />
         </div>
       ) : null}
     </Card>

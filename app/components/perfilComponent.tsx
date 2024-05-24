@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Tooltip from './tooltipComponent'
 
 export default function PerfilComponent({
@@ -8,11 +9,11 @@ export default function PerfilComponent({
   image: string | null | undefined
 }) {
   return (
-    <div className=" flex justify-end md:h-auto border border-black m-2">
+    <div className=" flex justify-end md:h-auto ">
       <Tooltip content={name} direction="left">
         <div className="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full">
           {image ? (
-            <img src={image} alt="perfil photo" width={40} height={40} />
+            <Image src={image} alt="perfil photo" width={40} height={40} />
           ) : (
             <svg
               className="absolute w-12 h-12 text-gray-400 -left-1"

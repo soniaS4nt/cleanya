@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { TableComponent, TableData } from '@/components/tableComponent'
+import { TableComponent, TableData } from '@/components/table/tableComponent'
 import {
   Card,
   DateRangePickerValue,
@@ -73,8 +73,7 @@ export default function Table({
 
   const datosFormateados = data?.map((item) => ({
     ...item,
-    fecha:
-      item.fecha instanceof Date ? dayjs(item.fecha).format('DD/MM/YYYY') : '',
+    fecha: dayjs(item.fecha as any).format('DD/MM/YYYY') ?? '',
     hora: item.hora[0],
     pago: formattedPago(item.pago),
     estado: (

@@ -74,15 +74,16 @@ export async function senEmail(body: BookingData, id: string) {
     throw error
   }
 }
-const LIMIT_PAGES = 6
 export async function fetchBookings(
   state: string,
   startDate: Date | string,
   endDate: Date | string,
-  curretPage: number
+  curretPage: number,
+  perPage: number
 ) {
   noStore()
   dbConnect()
+  const LIMIT_PAGES = perPage || 5
   const estadoKey = state as keyof typeof stateButtonDictionary
   const estado = stateButtonDictionary[estadoKey]
 
